@@ -84,9 +84,9 @@ namespace GuideMeApp
                       .IsRequired()
                       .HasMaxLength(500);
 
-                entity.HasOne(e => e.Guid)
+                entity.HasOne(e => e.Guide)
                       .WithMany()
-                      .HasForeignKey(e => e.GuidId)
+                      .HasForeignKey(e => e.GuideId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
 

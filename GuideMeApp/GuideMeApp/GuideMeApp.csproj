@@ -57,6 +57,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="ViewModels\**" />
+	  <AndroidResource Remove="Views\**" />
+	  <Compile Remove="ViewModels\**" />
+	  <Compile Remove="Views\**" />
+	  <EmbeddedResource Remove="ViewModels\**" />
+	  <EmbeddedResource Remove="Views\**" />
+	  <MauiCss Remove="ViewModels\**" />
+	  <MauiCss Remove="Views\**" />
+	  <MauiXaml Remove="ViewModels\**" />
+	  <MauiXaml Remove="Views\**" />
+	  <None Remove="ViewModels\**" />
+	  <None Remove="Views\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	</ItemGroup>
 
@@ -65,11 +80,6 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\" />
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>

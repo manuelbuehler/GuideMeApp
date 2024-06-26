@@ -10,7 +10,7 @@ namespace GuideMeApp.Models
 
         public byte[] Image { get; set; }
 
-        public Guid GuidId { get; set; }
-        public User Guid { get; set; }
+        public Guid GuideId { get; set; }
+        public User Guide { get; set; }
     }
 }
