@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using GuideMeApp.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace GuideMeApp
 {
@@ -16,8 +17,12 @@ namespace GuideMeApp
                     fonts.AddFont("MaterialIcons-Regular.ttf", "GoogleMaterialFont");
                 });
 
+
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<MainViewModel>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

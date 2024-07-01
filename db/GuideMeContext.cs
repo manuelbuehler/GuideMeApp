@@ -15,9 +15,18 @@ namespace GuideMeApp
 
         public DbSet<TripDetail> TripDetails { get; set; }
 
+
+    //    public GuideMeContext(DbContextOptions<GuideMeContext> options)
+    //: base(options)
+    //    {
+    //    }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=GuideMe;Integrated Security=True;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=GuideMe;Integrated Security=True;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

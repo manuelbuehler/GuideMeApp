@@ -57,25 +57,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="ViewModels\**" />
 	  <AndroidResource Remove="Views\**" />
-	  <Compile Remove="ViewModels\**" />
 	  <Compile Remove="Views\**" />
-	  <EmbeddedResource Remove="ViewModels\**" />
 	  <EmbeddedResource Remove="Views\**" />
-	  <MauiCss Remove="ViewModels\**" />
 	  <MauiCss Remove="Views\**" />
-	  <MauiXaml Remove="ViewModels\**" />
 	  <MauiXaml Remove="Views\**" />
-	  <None Remove="ViewModels\**" />
 	  <None Remove="Views\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
+	  <None Remove="Resources\Images\gletscher_wanderung.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
 		  <PrivateAssets>all</PrivateAssets>
@@ -89,6 +85,10 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
 	</ItemGroup>
 
 </Project>

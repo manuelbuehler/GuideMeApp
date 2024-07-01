@@ -9,6 +9,7 @@ namespace GuideMeApp.Models
         public Guid UserId { get; set; }
         public User User { get; set; }
 
+        public DateTime Date { get; set; }
 
         [Range(0, 5)]
         public int Rating { get; set; }

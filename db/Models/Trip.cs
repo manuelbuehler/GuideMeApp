@@ -8,14 +8,9 @@ namespace GuideMeApp.Models
 
         public string Description { get; set; } 
 
-        public DateTime Date { get; set; }
-
         public byte[] Image { get; set; }
 
         public Guid GuideId { get; set; }
         public User Guide { get; set; }
-
-        public Guid AddressId { get; set; }
-        public Address Address { get; set; }
     }
 }

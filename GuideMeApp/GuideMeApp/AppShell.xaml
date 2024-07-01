@@ -10,12 +10,17 @@
 
     <TabBar>
         <ShellContent
-            Title="Notes"
+            Title="Buchen"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
         <ShellContent 
-            Title="About"
+            Title="Meine Ausflüge"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}"/>
+
+        <ShellContent 
+            Title="Karte"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}"/>
     </TabBar>
