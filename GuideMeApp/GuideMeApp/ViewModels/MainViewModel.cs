@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using GuideMeApp.Models;
+using GuideMeApp.Views;
 
 namespace GuideMeApp.ViewModels
 {
@@ -28,9 +29,16 @@ namespace GuideMeApp.ViewModels
                 LastName = "Egli",
             };
 
-            Trips.Add(new Trip { Title = "Gletscher Wanderung", Description = "Eine Wanderung durch die Gletscher", Guide = user, Address = address});
-            Trips.Add(new Trip { Title = "Kanufahrt", Description = "Eine Fahrt im Kanu auf dem Fluss", Guide = user, Address = address });
-            Trips.Add(new Trip { Title = "Velotour", Description = "Eine Radtour durch die Berge", Guide = user, Address = address });
+            Trips.Add(new Trip { Title = "Gletscher Wanderung", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!", Guide = user, Address = address });
+            Trips.Add(new Trip { Title = "Kanufahrt", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!", Guide = user, Address = address });
+            Trips.Add(new Trip { Title = "Velotour", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!", Guide = user, Address = address });
         }
+
+        [RelayCommand]
+        async Task Tap(Trip t)
+        {
+            await Shell.Current.GoToAsync(nameof(TripDetailPage), true, new Dictionary<string, object>() { { "Trip", t } });
+        }
+
     }
 }

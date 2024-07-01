@@ -13,7 +13,13 @@
     <CollectionView ItemsSource="{Binding Trips}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Trip">
-                <Frame Padding="0" Margin="10" CornerRadius="10" HasShadow="True" BackgroundColor="{StaticResource Primary}" BorderColor="{StaticResource Border}">
+                <!--<Border BackgroundColor="{StaticResource Border}" StrokeThickness="1">-->
+                <Frame Padding="0" Margin="10" CornerRadius="10" HasShadow="True" BackgroundColor="{StaticResource Primary}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=TapCommand}"
+                                           CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*" />
@@ -24,7 +30,7 @@
                         <Image Grid.Row="0" Aspect="AspectFill" Source="gletscher_wanderung.jpg" HeightRequest="130"/>
 
                         <!-- Trip Details -->
-                        <Grid Grid.Row="1" BackgroundColor="{StaticResource Secondary}" Padding="10">
+                        <Grid Grid.Row="1" BackgroundColor="{StaticResource Primary}" Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*" />
                                 <ColumnDefinition Width="1*" />
@@ -57,6 +63,7 @@
                         </Frame>
                     </Grid>
                 </Frame>
+                <!--</Border>-->
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"      
+             x:Class="GuideMeApp.Views.TripDetailPage"
+             xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
+             xmlns:models="clr-namespace:GuideMeApp.Models"
+             x:DataType="viewmodels:TripDetailViewModel"
+             Title="{Binding Trip.Title}">
+
+    <VerticalStackLayout Padding="20">
+        <Image Source="gletscher_wanderung.jpg" Aspect="AspectFill" HeightRequest="200" />
+        <Grid ColumnDefinitions=".75*, .25*">
+            <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand" Margin="10">
+                <Label Text="{Binding Trip.Title}" FontSize="24" FontAttributes="Bold" />
+            </StackLayout>
+
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="10">
+                <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="40" IsClippedToBounds="False" VerticalOptions="Start" HorizontalOptions="Center" Margin="10" BackgroundColor="White" BorderColor="{StaticResource Border}">
+                    <Image Source="{Binding Trip.Guide.Image}" Aspect="AspectFill" />
+                </Frame>
+                <Label Text="{Binding Trip.Guide.FirstName}" FontSize="18" />
+                <Label Text="55 Jahre"/>
+            </VerticalStackLayout>
+
+        </Grid>
+        <!-- Beschreibung -->
+        <Label Text="Beschreibung" FontSize="24" FontAttributes="Bold"/>
+        <Label Text="{Binding Trip.Description}"  />
+
+        <!-- Zusätzliche Informationen -->
+        <Label Text="Besondere Infos" FontSize="24" FontAttributes="Bold" />
+        <Label Text="{Binding Trip.Date}" />
+        <Label Text="{Binding Trip.Address.State}" />
+
+        <Button Text="BUCHEN" 
+                Command="{Binding BookCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>
