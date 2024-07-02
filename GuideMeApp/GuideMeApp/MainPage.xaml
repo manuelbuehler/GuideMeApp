@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:models="clr-namespace:GuideMeApp.Models"
              xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
              x:Class="GuideMeApp.MainPage"
@@ -10,61 +11,62 @@
         <viewmodels:MainViewModel />
     </ContentPage.BindingContext>
 
-    <CollectionView ItemsSource="{Binding Trips}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="models:Trip">
-                <!--<Border BackgroundColor="{StaticResource Border}" StrokeThickness="1">-->
-                <Frame Padding="0" Margin="10" CornerRadius="10" HasShadow="True" BackgroundColor="{StaticResource Primary}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer  
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=TapCommand}"
-                                           CommandParameter="{Binding .}"/>
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
+    <VerticalStackLayout>
+        <!-- Auswahlansicht horizontal scrollbar -->
+        <ScrollView Orientation="Horizontal" HeightRequest="50">
+            <FlexLayout Direction="Row" Wrap="NoWrap" JustifyContent="Start" AlignItems="Center" HeightRequest="50">
+                <input:SelectionView x:Name="filter" ColumnNumber="20" HeightRequest="50" RowSpacing="10"/>
+            </FlexLayout>
+        </ScrollView>
 
-                        <!-- Trip Image -->
-                        <Image Grid.Row="0" Aspect="AspectFill" Source="gletscher_wanderung.jpg" HeightRequest="130"/>
+        <!-- CollectionView vertikale scrollbar -->
+        <CollectionView ItemsSource="{Binding Trips}" VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Trip">
+                    <Frame Padding="0" Margin="10" CornerRadius="10" HasShadow="True" BackgroundColor="{StaticResource Primary}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MainViewModel}}, Path=TapCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
 
-                        <!-- Trip Details -->
-                        <Grid Grid.Row="1" BackgroundColor="{StaticResource Primary}" Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
+                            <!-- Trip Image -->
+                            <Image Grid.Row="0" Aspect="AspectFill" Source="gletscher_wanderung.jpg" HeightRequest="130"/>
 
-                            <!-- Trip Information -->
-                            <StackLayout Grid.Column="0" VerticalOptions="Center">
-                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="Large" TextColor="White"/>
-                                <Label Text="{Binding Address.City}" TextColor="White"/>
-                                <!--<HorizontalStackLayout >
-                                    <Label Text="{Binding Address.City}"/>
-                                    <Label Text=", "/>
-                                    <Label Text="{Binding Address.PostalCode}"/>
-                                </HorizontalStackLayout>-->
-                                <Label Text="{Binding Date}" TextColor="White"/>
-                            </StackLayout>
+                            <!-- Trip Details -->
+                            <Grid Grid.Row="1" BackgroundColor="{StaticResource Primary}" Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
 
-                            <!-- Trip Rating and Navigation -->
-                            <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Image Source="star_icon.png" WidthRequest="20" HeightRequest="20" />
-                                    <!--<Label Text="{Binding Rating}" TextColor="White" VerticalOptions="Center" />-->
+                                <!-- Trip Information -->
+                                <StackLayout Grid.Column="0" VerticalOptions="Center">
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="Large" TextColor="White"/>
+                                    <Label Text="{Binding Address.PostalCodeCity}" TextColor="White"/>
+                                    <Label Text="{Binding Date}" TextColor="White"/>
                                 </StackLayout>
-                            </StackLayout>
-                        </Grid>
 
-                        <!-- Guide Image -->
-                        <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="40" IsClippedToBounds="True" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" BackgroundColor="White" BorderColor="{StaticResource Border}">
-                            <Image Source="{Binding Guide.Image}" Aspect="AspectFill" />
-                        </Frame>
-                    </Grid>
-                </Frame>
-                <!--</Border>-->
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                                <!-- Trip Rating and Navigation -->
+                                <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="End">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Image Source="star_icon.png" WidthRequest="20" HeightRequest="20" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+
+                            <!-- Guide Image -->
+                            <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="40" IsClippedToBounds="True" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" BackgroundColor="White">
+                                <!--<Image Source="{Binding Guide.Image}" Aspect="AspectFill" />-->
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>
