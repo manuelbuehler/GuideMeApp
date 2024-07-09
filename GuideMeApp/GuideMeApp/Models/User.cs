@@ -1,9 +1,11 @@
 ﻿#nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GuideMeApp.Models
 {
+    [Table("User")]
     public class User : BaseEntity
     {
         [Required (ErrorMessage = "Ungültiger Vorname. Bitte geben Sie einen Vornamen an.")]

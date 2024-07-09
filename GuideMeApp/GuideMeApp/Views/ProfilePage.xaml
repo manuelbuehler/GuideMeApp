@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:icons="clr-namespace:GuideMeApp"
+             x:Class="GuideMeApp.Views.ProfilePage"
+             Title="ProfilePage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Back Button -->
+            <!--<ImageButton Source="back_icon.png" HorizontalOptions="Start" VerticalOptions="Start" Clicked="OnBackButtonClicked"/>-->
+
+            <!-- Profile Section -->
+            <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="20">
+                <Frame HasShadow="False" BorderColor="DarkBlue" CornerRadius="100" Padding="0" HorizontalOptions="Center">
+                    <Image Source="profile_image.png" Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>
+                </Frame>
+                <Button Text="Profilbild bearbeiten" TextColor="Black" BackgroundColor="Transparent" Command="{Binding EditProfileImageCommand}"/>
+            </StackLayout>
+
+            <!-- Accessibility Section -->
+            <StackLayout Grid.Row="2" VerticalOptions="CenterAndExpand">
+                <Label Text="Barrierefreiheit" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start"/>
+
+                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*" Padding="0,20,0,0" ColumnSpacing="20" RowSpacing="20">
+                    <!-- Bildschirmleser -->
+                    <Frame BorderColor="Gray" BackgroundColor="#d3d3d3" CornerRadius="10">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Hearing}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Bildschirmleser" FontSize="Small" TextColor="Black" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Blink-Blocker -->
+                    <Frame Grid.Column="1" BorderColor="Gray" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Flash_off}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Blink-Blocker" FontSize="Small" TextColor="White" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <!-- Textvergrößerung -->
+                    <Frame Grid.Column="2" BorderColor="Gray" BackgroundColor="#d3d3d3" CornerRadius="10">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Format_size}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Textvergrößerung" FontSize="Small" TextColor="Black" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Hoher Kontrast -->
+                    <Frame Grid.Row="1" BorderColor="Gray" BackgroundColor="#d3d3d3" CornerRadius="10">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Contrast}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Hoher Kontrast" FontSize="Small" TextColor="Black" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Textleser -->
+                    <Frame Grid.Row="1" Grid.Column="1" BorderColor="Gray" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Volume_up}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Textleser" FontSize="Small" TextColor="White" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                    <!-- Sprachbefehle -->
+                    <Frame Grid.Row="1" Grid.Column="2" BorderColor="Gray" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
+                        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                            <Label Text="{x:Static icons:IconFont.Mic}" Style="{x:StaticResource GoogleFont}" TextColor="{StaticResource Primary}" FontSize="60"/>
+                            <Label Text="Sprachbefehle" FontSize="Small" TextColor="White" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </StackLayout>
+
+            <!-- Save Button -->
+            <Button Text="Änderungen speichern" FontSize="Medium" BackgroundColor="#778da9" TextColor="White" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,5 +1,8 @@
-﻿namespace GuideMeApp.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GuideMeApp.Models
 {
+    [Table ("UserSetting")]
     public class UserSetting : BaseEntity
     {
         public bool ScreenReader { get; set; }

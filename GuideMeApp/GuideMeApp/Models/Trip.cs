@@ -1,7 +1,10 @@
 ﻿# nullable disable
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace GuideMeApp.Models
 {
+    [Table ("Trip")]
     public class Trip : BaseEntity
     { 
         public string Title { get; set; }

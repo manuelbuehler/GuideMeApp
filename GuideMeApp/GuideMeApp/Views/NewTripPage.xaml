@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GuideMeApp.Views"
+             xmlns:models="clr-namespace:GuideMeApp.Models"
+             xmlns:viewmodel="clr-namespace:GuideMeApp.ViewModels"
+             x:Class="GuideMeApp.Views.NewTripPage"
+             x:DataType="viewmodel:NewTripViewModel"
+             Title="Neuer Ausflug">
+    <Grid RowDefinitions="Auto, *" Padding="10">
+        <!-- Navigation Bar -->
+        <local:SubNavBar x:Name="SubNavBar"/>
+
+        <!-- Page Content -->
+        <ContentView Grid.Row="1">
+            <VerticalStackLayout Spacing="15">
+                <Entry Text="{Binding Trip.Title}" />
+                <Entry Placeholder="Beschreibung" Text="{Binding Trip.Description}"/>
+
+                <Button Text="Bild"/>
+
+                <Entry Placeholder="Standort" Text="{Binding Trip.Address}"/>
+                <DatePicker/>
+                <TimePicker/>
+                <Button Text="ERSTELLEN"/>
+            </VerticalStackLayout>
+        </ContentView>
+    </Grid>
+</ContentPage>
