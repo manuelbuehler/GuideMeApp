@@ -9,11 +9,11 @@
     <Color x:Key="Primary">#778da9</Color>
     <Color x:Key="PrimaryDark">#3b4963</Color> 
     <Color x:Key="PrimaryDarkText">#1e1e1e</Color>
-    <Color x:Key="Secondary">#e0e1dd</Color>
-    <Color x:Key="SecondaryDark">#5a5b59</Color>
+    <Color x:Key="Secondary">#415a77</Color>
+    <Color x:Key="SecondaryDark">#415a77</Color>
     <Color x:Key="SecondaryDarkText">#ffffff</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
-    <Color x:Key="Border">#415a77</Color>
+    <Color x:Key="Border">#2B0B98</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

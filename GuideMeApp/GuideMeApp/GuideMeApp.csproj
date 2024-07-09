@@ -58,7 +58,12 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
+	  <None Remove="Resources\Images\add.svg" />
+	  <None Remove="Resources\Images\dashboard.svg" />
 	  <None Remove="Resources\Images\gletscher_wanderung.jpg" />
+	  <None Remove="Resources\Images\map.svg" />
+	  <None Remove="Resources\Images\pascal_egli.jpg" />
+	  <None Remove="Resources\Images\setting.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -82,6 +87,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.8" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.61" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -89,12 +95,36 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\MapPage.xaml.cs">
+	    <DependentUpon>MapPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\MyTripsPage.xaml.cs">
+	    <DependentUpon>MyTripsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\TripDetailPage.xaml.cs">
 	    <DependentUpon>TripDetailPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Header.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MapPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyTripsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\NewTripPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SubNavBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TripDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

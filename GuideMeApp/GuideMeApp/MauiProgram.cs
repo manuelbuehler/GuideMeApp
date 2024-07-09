@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
+using InputKit.Handlers;
 using Microsoft.Extensions.Logging;
 
 namespace GuideMeApp
@@ -13,6 +14,10 @@ namespace GuideMeApp
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .ConfigureMauiHandlers(handlers =>
+                {
+                    handlers.AddInputKitHandlers();
+                })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -26,6 +31,15 @@ namespace GuideMeApp
 
             builder.Services.AddTransient<TripDetailPage>();
             builder.Services.AddTransient<TripDetailViewModel>();
+
+            builder.Services.AddTransient<MyTripsPage>();
+            builder.Services.AddTransient<MyTripsViewModel>();
+
+            builder.Services.AddTransient<NewTripPage>();
+            builder.Services.AddTransient<NewTripViewModel>();
+
+            builder.Services.AddTransient<ProfilePage>();
+            builder.Services.AddTransient<ProfileViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();

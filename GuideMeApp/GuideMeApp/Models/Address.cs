@@ -13,6 +13,14 @@ namespace GuideMeApp.Models
         public string Country { get; set; }
         public string PostalCode { get; set; }
 
-        public string PostalCodeCity { get => $"{PostalCode} {City}";}
+        public string PostalCodeCity 
+        { 
+            get => $"{PostalCode} {City}";
+        }
+           
+        public string AddressString 
+        {
+            get => $"{Street}, {PostalCodeCity}";
+        }
     }
 }

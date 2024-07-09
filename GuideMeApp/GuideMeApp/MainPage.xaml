@@ -62,6 +62,7 @@
                             <!-- Guide Image -->
                             <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="40" IsClippedToBounds="True" VerticalOptions="Center" HorizontalOptions="Center" Margin="10" BackgroundColor="White">
                                 <!--<Image Source="{Binding Guide.Image}" Aspect="AspectFill" />-->
+                                <Image Source="gletscher_wanderung.jpg" Aspect="AspectFill"/>
                             </Frame>
                         </Grid>
                     </Frame>

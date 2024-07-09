@@ -17,6 +17,7 @@ namespace GuideMeApp.ViewModels
 
             Address address = new Address
             {
+                Street = "Malvenweg 3",
                 City = "Wallis",
                 PostalCode = "4900",
                 Country = "Switzerland",

@@ -1,5 +1,4 @@
-﻿using GuideMeApp.Models;
-using GuideMeApp.Views;
+﻿using GuideMeApp.Views;
 
 namespace GuideMeApp
 {
@@ -10,6 +9,9 @@ namespace GuideMeApp
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(TripDetailPage), typeof(TripDetailPage));
+            Routing.RegisterRoute(nameof(NewTripPage), typeof(NewTripPage));
+            Routing.RegisterRoute("MyTripsPage", typeof(MyTripsPage));
+            Routing.RegisterRoute("NewTripPage", typeof(NewTripPage));
         }
     }
 }
