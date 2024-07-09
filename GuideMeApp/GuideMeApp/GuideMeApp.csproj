@@ -59,11 +59,8 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	  <None Remove="Resources\Images\add.svg" />
-	  <None Remove="Resources\Images\dashboard.svg" />
 	  <None Remove="Resources\Images\gletscher_wanderung.jpg" />
 	  <None Remove="Resources\Images\map.svg" />
-	  <None Remove="Resources\Images\pascal_egli.jpg" />
-	  <None Remove="Resources\Images\setting.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
