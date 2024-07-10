@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using GuideMeApp.Data;
 using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
 using InputKit.Handlers;
@@ -40,6 +41,8 @@ namespace GuideMeApp
 
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<ProfileViewModel>();
+
+            builder.Services.AddSingleton<GuideMeDatabase>();
 
 #if DEBUG
             builder.Logging.AddDebug();

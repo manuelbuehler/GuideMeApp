@@ -9,7 +9,6 @@ namespace GuideMeApp
             InitializeComponent();
             BindingContext = vm;
 
-
             filter.ItemsSource = new[]
             {
                 "Umkreis: 10 km",

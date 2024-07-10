@@ -14,15 +14,16 @@
         <!-- Page Content -->
         <ContentView Grid.Row="1">
             <VerticalStackLayout Spacing="15">
-                <Entry Text="{Binding Trip.Title}" />
-                <Entry Placeholder="Beschreibung" Text="{Binding Trip.Description}"/>
+                <Entry Text="{Binding Trip.Title}" Placeholder="Titel" />
+                <Entry Text="{Binding Trip.Description}" Placeholder="Beschreibung"/>
 
-                <Button Text="Bild"/>
+                <Button Text="Bild" />
 
-                <Entry Placeholder="Standort" Text="{Binding Trip.Address}"/>
+                <!--<Entry Placeholder="Standort" Text="{Binding Trip.Address}"/>-->
                 <DatePicker/>
                 <TimePicker/>
-                <Button Text="ERSTELLEN"/>
+                <Button Text="ERSTELLEN" 
+                        Command="{Binding CreateCommand}"/>
             </VerticalStackLayout>
         </ContentView>
     </Grid>
