@@ -20,8 +20,8 @@
                 <Button Text="Bild" />
 
                 <!--<Entry Placeholder="Standort" Text="{Binding Trip.Address}"/>-->
-                <DatePicker/>
-                <TimePicker/>
+                <DatePicker Date="{Binding Trip.Date}"/>
+                <TimePicker Time="{Binding Time}"/>
                 <Button Text="ERSTELLEN" 
                         Command="{Binding CreateCommand}"/>
             </VerticalStackLayout>

@@ -6,16 +6,31 @@ using GuideMeApp.Models;
 namespace GuideMeApp.ViewModels
 {
     [QueryProperty(nameof(Models.Trip), "Trip")]
-    public partial class NewTripViewModel(GuideMeDatabase database) : ObservableObject
+    public partial class NewTripViewModel : ObservableObject
     {
+        private readonly GuideMeDatabase _database;
+
         [ObservableProperty]
-        private Trip trip = new();
+        private Trip trip;
+
+        [ObservableProperty]
+        private TimeSpan time;
+
+        public NewTripViewModel(GuideMeDatabase database)
+        {
+            _database = database;
+            Trip = new Trip { Date = DateTime.Now };
+        }
+
+        partial void OnTimeChanged(TimeSpan value)
+        {
+            Trip.Date += Time;
+        }
 
         [RelayCommand]
         async Task Create()
         {
-
-            await database.CreateTripAsync(trip);
+            await _database.CreateTripAsync(Trip);
             await Shell.Current.GoToAsync("..");
         }
     }
