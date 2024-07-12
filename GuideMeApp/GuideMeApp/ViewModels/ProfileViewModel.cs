@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using GuideMeApp.Models;
+using GuideMeApp.Shared.Models;
 
 namespace GuideMeApp.ViewModels
 {

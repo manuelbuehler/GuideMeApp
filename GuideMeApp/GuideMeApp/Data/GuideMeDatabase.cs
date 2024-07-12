@@ -1,4 +1,4 @@
-﻿using GuideMeApp.Models;
+﻿using GuideMeApp.Shared.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;

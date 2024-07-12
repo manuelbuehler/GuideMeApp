@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuideMeApp.Data;
-using GuideMeApp.Models;
+using GuideMeApp.Shared.Models;
 
 namespace GuideMeApp.ViewModels
 {
-    [QueryProperty(nameof(Models.Trip), "Trip")]
+    [QueryProperty(nameof(Shared.Models.Trip), "Trip")]
     public partial class NewTripViewModel : ObservableObject
     {
         private readonly GuideMeDatabase _database;

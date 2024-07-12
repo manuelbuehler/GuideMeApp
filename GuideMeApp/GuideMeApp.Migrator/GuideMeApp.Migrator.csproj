@@ -14,4 +14,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GuideMeApp.Shared\GuideMeApp.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

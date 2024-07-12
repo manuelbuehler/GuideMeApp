@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GuideMeApp.Models;
+using GuideMeApp.Shared.Models;
 using GuideMeApp.Views;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace GuideMeApp.ViewModels
 {

@@ -1,8 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using GuideMeApp.Data;
+using GuideMeApp.Shared.Data;
+using GuideMeApp.Shared.Repository;
 using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
 using InputKit.Handlers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace GuideMeApp
@@ -43,6 +46,14 @@ namespace GuideMeApp
             builder.Services.AddTransient<ProfileViewModel>();
 
             builder.Services.AddSingleton<GuideMeDatabase>();
+
+            builder.Services.AddDbContext<LocalDbContext>(/*opt =>
+        opt.UseSqlServer("your connection string should be add here")*/);
+
+            builder.Services.AddScoped<ITripRepository, TripRepository>();
+            builder.Services.AddScoped<ITripDetailRepository, TripDetailRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
 #if DEBUG
             builder.Logging.AddDebug();

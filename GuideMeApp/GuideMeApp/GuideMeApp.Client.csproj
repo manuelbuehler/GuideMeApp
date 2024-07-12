@@ -90,10 +90,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\GuideMeApp.Shared\GuideMeApp.Shared.csproj" />
 	</ItemGroup>
 

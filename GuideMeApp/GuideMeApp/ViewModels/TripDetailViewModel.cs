@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GuideMeApp.Models;
+using GuideMeApp.Shared.Models;
 
 namespace GuideMeApp.ViewModels
 {
