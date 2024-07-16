@@ -13,11 +13,17 @@ namespace GuideMeApp.ViewModels
         public static ObservableCollection<Trip> trips;
 
         readonly ITripService _tripService;
+        readonly IUserService _userService;
+        readonly IRoleService _roleService;
+        readonly IUserSettingService _userSettingService;
 
-        public MainViewModel(ITripService tripService)
+        public MainViewModel(ITripService tripService, IUserService userService, IRoleService roleService, IUserSettingService userSettingService)
         {
             Trips = new ObservableCollection<Trip>();
             _tripService = tripService;
+            _userService = userService;
+            _roleService = roleService;
+            _userSettingService = userSettingService;
 
 
             //    Address address = new Address
@@ -46,6 +52,22 @@ namespace GuideMeApp.ViewModels
         [RelayCommand]
         void Load()
         {
+            var u = _userService.GetAll().FirstOrDefault();
+
+
+            if (u is null)
+            {
+                var us = new UserSetting() { BlinkBlocker = false, HighContrast = false, ScreenReader=false, TextEnlargement=false, TextReader=false, VoiceCommands=false };
+                var a = new Address() { AddressLine1 = "Demutstrasse 119", City = "St.Gallen", Country = "CH", PostalCode = "9000" };
+                var r = new Role() { Id = 1, Name = "Admin" };
+                
+                _userSettingService.Add(us);
+                _roleService.Add(r);
+
+                _userService.Add(new User() { Id = 1, BirthDate = DateTime.Now, FirstName = "Pascal", LastName = "Egli", UserSettingId = us.Id, UserGroup = UserGroups.Alle, RoleId = r.Id });
+            }
+            
+
             var trips = _tripService.GetAll();
             Trips.Clear();
             trips.ForEach(t => Trips.Add(t));

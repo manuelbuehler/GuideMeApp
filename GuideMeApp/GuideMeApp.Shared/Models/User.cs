@@ -1,6 +1,7 @@
 ﻿#nullable disable
 
 using AgeCalculator;
+using AgeCalculator.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -42,7 +43,7 @@ namespace GuideMeApp.Shared.Models
         [NotMapped]
         public int Age
         {
-            get => new Age(BirthDate, DateTime.Now).Years;
+            get => BirthDate.CalculateAge(DateTime.Now).Years;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GuideMeApp.Shared.Data;
 using GuideMeApp.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuideMeApp.Shared.Repositories
 {
@@ -17,7 +18,9 @@ namespace GuideMeApp.Shared.Repositories
 
         public List<Trip> GetUpcommingTripsByUserId(int userId)
         {
-            return _context.Trips.Where(t => t.GuideId == userId && t.Date > DateTime.Now).ToList();
+            return _context.Trips
+                .Where(t => t.GuideId == userId /*&& t.Date > DateTime.Now*/)
+                .ToList();
         }
     }
 }

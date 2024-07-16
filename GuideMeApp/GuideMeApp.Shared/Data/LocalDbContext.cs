@@ -66,11 +66,15 @@ namespace GuideMeApp.Shared.Data
             {
                 entity.ToTable("Trip");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Date).HasColumnType("datetime");
-                entity.HasOne(e => e.Guide)
-                      .WithMany()
-                      .HasForeignKey(e => e.GuideId);
+                //entity.Property(e => e.Date).HasColumnType("datetime");
+                //entity.HasOne(e => e.Guide)
+                //      .WithOne()
+                //      .HasForeignKey(e => e.GuideId);
                 entity.OwnsOne(e => e.Address);
+                entity.HasOne(e => e.Guide)
+                    .WithMany() 
+                    .HasForeignKey(e => e.GuideId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<TripDetail>(entity =>

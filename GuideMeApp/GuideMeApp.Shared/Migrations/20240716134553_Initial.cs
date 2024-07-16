@@ -15,41 +15,26 @@ namespace GuideMeApp.Shared.Migrations
                 name: "dbo");
 
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Roles",
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Street = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Country = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    PostalCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Role",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserSetting",
+                name: "UserSettings",
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     ScreenReader = table.Column<bool>(type: "INTEGER", nullable: false),
                     BlinkBlocker = table.Column<bool>(type: "INTEGER", nullable: false),
                     TextEnlargement = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -59,46 +44,46 @@ namespace GuideMeApp.Shared.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSetting", x => x.Id);
+                    table.PrimaryKey("PK_UserSettings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserGroup = table.Column<int>(type: "INTEGER", nullable: false),
                     Image = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserSettingId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    AddressId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    RoleId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserSettingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Address_AddressLine1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_AddressLine2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_AddressLine3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_PostalCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_State = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_Country = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_Address_AddressId",
-                        column: x => x.AddressId,
-                        principalSchema: "dbo",
-                        principalTable: "Address",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_User_Role_RoleId",
+                        name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
                         principalSchema: "dbo",
-                        principalTable: "Role",
+                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_UserSetting_UserSettingId",
+                        name: "FK_Users_UserSettings_UserSettingId",
                         column: x => x.UserSettingId,
                         principalSchema: "dbo",
-                        principalTable: "UserSetting",
+                        principalTable: "UserSettings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -108,31 +93,30 @@ namespace GuideMeApp.Shared.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Image = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    GuideId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    AddressId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    GuideId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Address_AddressLine1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_AddressLine2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_AddressLine3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_PostalCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_State = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_Country = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trip", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trip_Address_AddressId",
-                        column: x => x.AddressId,
-                        principalSchema: "dbo",
-                        principalTable: "Address",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Trip_User_GuideId",
+                        name: "FK_Trip_Users_GuideId",
                         column: x => x.GuideId,
                         principalSchema: "dbo",
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -140,27 +124,22 @@ namespace GuideMeApp.Shared.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Rating = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TripDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TripDetail_User_UserId",
+                        name: "FK_TripDetail_Users_UserId",
                         column: x => x.UserId,
                         principalSchema: "dbo",
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trip_AddressId",
-                schema: "dbo",
-                table: "Trip",
-                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trip_GuideId",
@@ -175,27 +154,15 @@ namespace GuideMeApp.Shared.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_AddressId",
+                name: "IX_Users_RoleId",
                 schema: "dbo",
-                table: "User",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_FirstName_LastName",
-                schema: "dbo",
-                table: "User",
-                columns: new[] { "FirstName", "LastName" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_RoleId",
-                schema: "dbo",
-                table: "User",
+                table: "Users",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_UserSettingId",
+                name: "IX_Users_UserSettingId",
                 schema: "dbo",
-                table: "User",
+                table: "Users",
                 column: "UserSettingId");
         }
 
@@ -211,19 +178,15 @@ namespace GuideMeApp.Shared.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "User",
+                name: "Users",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Address",
+                name: "Roles",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Role",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "UserSetting",
+                name: "UserSettings",
                 schema: "dbo");
         }
     }

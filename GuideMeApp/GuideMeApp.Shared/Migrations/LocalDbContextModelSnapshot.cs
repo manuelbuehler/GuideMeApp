@@ -21,9 +21,9 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.Role", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -37,19 +37,19 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.Trip", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GuideId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("GuideId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -69,15 +69,15 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.TripDetail", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -88,9 +88,9 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
@@ -106,14 +106,14 @@ namespace GuideMeApp.Shared.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("UserGroup")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserSettingId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserSettingId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -126,9 +126,9 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.UserSetting", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("BlinkBlocker")
                         .HasColumnType("INTEGER");
@@ -158,13 +158,13 @@ namespace GuideMeApp.Shared.Migrations
                     b.HasOne("GuideMeApp.Shared.Models.User", "Guide")
                         .WithMany()
                         .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.OwnsOne("GuideMeApp.Shared.Models.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("TripId")
-                                .HasColumnType("TEXT");
+                            b1.Property<int>("TripId")
+                                .HasColumnType("INTEGER");
 
                             b1.Property<string>("AddressLine1")
                                 .HasColumnType("TEXT");
@@ -228,8 +228,8 @@ namespace GuideMeApp.Shared.Migrations
 
                     b.OwnsOne("GuideMeApp.Shared.Models.Address", "Address", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("TEXT");
+                            b1.Property<int>("UserId")
+                                .HasColumnType("INTEGER");
 
                             b1.Property<string>("AddressLine1")
                                 .HasColumnType("TEXT");

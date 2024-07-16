@@ -50,7 +50,7 @@ namespace GuideMeApp
 
             builder.Services.AddTransient<LocalDbContext>((services) =>
             {
-                return new LocalDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite001.db3"));
+                return new LocalDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite002.db3"));
             });
 
             builder.Services.AddScoped<ITripRepository, TripRepository>();

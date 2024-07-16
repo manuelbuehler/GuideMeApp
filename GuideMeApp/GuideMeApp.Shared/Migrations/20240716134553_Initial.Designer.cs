@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideMeApp.Shared.Migrations
 {
     [DbContext(typeof(LocalDbContext))]
-    [Migration("20240712120154_Initial")]
+    [Migration("20240716134553_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -22,47 +22,11 @@ namespace GuideMeApp.Shared.Migrations
                 .HasDefaultSchema("dbo")
                 .HasAnnotation("ProductVersion", "8.0.7");
 
-            modelBuilder.Entity("GuideMeApp.Shared.Models.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address", "dbo");
-                });
-
             modelBuilder.Entity("GuideMeApp.Shared.Models.Role", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -71,27 +35,24 @@ namespace GuideMeApp.Shared.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", "dbo");
+                    b.ToTable("Roles", "dbo");
                 });
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.Trip", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GuideId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("GuideId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -104,8 +65,6 @@ namespace GuideMeApp.Shared.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.HasIndex("GuideId");
 
                     b.ToTable("Trip", "dbo");
@@ -113,15 +72,15 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.TripDetail", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -132,12 +91,9 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("TEXT");
@@ -153,33 +109,29 @@ namespace GuideMeApp.Shared.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("UserGroup")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("UserSettingId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserSettingId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserSettingId");
 
-                    b.HasIndex("FirstName", "LastName");
-
-                    b.ToTable("User", "dbo");
+                    b.ToTable("Users", "dbo");
                 });
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.UserSetting", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("BlinkBlocker")
                         .HasColumnType("INTEGER");
@@ -201,24 +153,53 @@ namespace GuideMeApp.Shared.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSetting", "dbo");
+                    b.ToTable("UserSettings", "dbo");
                 });
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.Trip", b =>
                 {
-                    b.HasOne("GuideMeApp.Shared.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GuideMeApp.Shared.Models.User", "Guide")
                         .WithMany()
                         .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.OwnsOne("GuideMeApp.Shared.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("TripId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("AddressLine1")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressLine2")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressLine3")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostalCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("TripId");
+
+                            b1.ToTable("Trip", "dbo");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TripId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Guide");
                 });
@@ -236,12 +217,6 @@ namespace GuideMeApp.Shared.Migrations
 
             modelBuilder.Entity("GuideMeApp.Shared.Models.User", b =>
                 {
-                    b.HasOne("GuideMeApp.Shared.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GuideMeApp.Shared.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -254,7 +229,42 @@ namespace GuideMeApp.Shared.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.OwnsOne("GuideMeApp.Shared.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("AddressLine1")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressLine2")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressLine3")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostalCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("Users", "dbo");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Address")
+                        .IsRequired();
 
                     b.Navigation("Role");
 
