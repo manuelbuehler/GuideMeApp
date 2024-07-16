@@ -9,6 +9,9 @@ namespace GuideMeApp.ViewModels
     public partial class NewTripViewModel : ObservableObject
     {
         readonly ITripService _tripService;
+        readonly IRoleService _roleService;
+        readonly IUserService _userService;
+        readonly IUserSettingService _userSettingService;
 
         [ObservableProperty]
         private Trip trip;
@@ -16,9 +19,12 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         private TimeSpan time;
 
-        public NewTripViewModel(ITripService tripService)
+        public NewTripViewModel(ITripService tripService, IRoleService roleService, IUserService userService, IUserSettingService userSettingService)
         {
             _tripService = tripService;
+            _roleService = roleService;
+            _userService = userService;
+            _userSettingService = userSettingService;
             Trip = new Trip { Date = DateTime.Now };
         }
 
@@ -30,16 +36,15 @@ namespace GuideMeApp.ViewModels
         [RelayCommand]
         async Task Create()
         {
-            var a = new Address() { AddressLine1 = "Demutsstrasse 119", PostalCode="9000", City="St.Gallen", Country= "CH" };
-            var r = new Role() { Name = "Admin" };
-            var us  = new UserSetting() { BlinkBlocker=false, HighContrast=false, ScreenReader=false, TextEnlargement=false, TextReader=false, VoiceCommands=false };
+            var a = new Address() { AddressLine1 = "Demutstrasse 119", PostalCode="9000", City = "St.Gallen", Country = "Switzerland" };
+            var u = _userService.GetAll().First();
 
-            var u = new User { FirstName="Pascal", LastName="Egli", Address = a, BirthDate=DateTime.Now, RoleId=r.Id, UserGroup=UserGroups.Alle/*, UserSettingId=us.Id */};
+            Trip.Address = a;
+            Trip.GuideId = u.Id;
+            Trip.Image = new byte[1];
 
-            //var r = new Role(){ Id = new Guid(), Name = "Admin" };
-            //_roleService.Add(r);
-
-            //_tripService.Add(Trip);
+            _tripService.Add(Trip);
+            var t = _tripService.GetAll();
             await Shell.Current.GoToAsync("..");
         }
     }

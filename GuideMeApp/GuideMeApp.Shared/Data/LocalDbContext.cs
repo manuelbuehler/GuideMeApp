@@ -82,6 +82,11 @@ namespace GuideMeApp.Shared.Data
                       .HasForeignKey(e => e.UserId);
             });
 
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.OwnsOne(e => e.Address);
+            });
+
             //modelBuilder.Entity<User>(entity =>
             //{
             //    entity.ToTable("User");

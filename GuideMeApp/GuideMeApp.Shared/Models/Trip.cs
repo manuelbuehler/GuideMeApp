@@ -21,7 +21,7 @@ namespace GuideMeApp.Shared.Models
         public byte[] Image { get; set; }
 
         [Required]
-        public Guid GuideId { get; set; }
+        public int GuideId { get; set; }
         public User Guide { get; set; }
 
         [Required]

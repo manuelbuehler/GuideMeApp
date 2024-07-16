@@ -10,7 +10,7 @@
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior 
             EventName="Appearing"
-            Command="{Binding LoadDataCommand}"/>
+            Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
 
     <VerticalStackLayout>
@@ -48,7 +48,7 @@
                                 <!-- Trip Information -->
                                 <StackLayout Grid.Column="0" VerticalOptions="Center">
                                     <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="Large" TextColor="White"/>
-                                    <!--<Label Text="{Binding Address.PostalCodeCity}" TextColor="White"/>-->
+                                    <Label Text="{Binding Address.PostalCodeCity}" TextColor="White"/>
                                     <Label Text="{Binding Date}" TextColor="White"/>
                                 </StackLayout>
 

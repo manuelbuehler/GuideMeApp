@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"      
              x:Class="GuideMeApp.Views.TripDetailPage"
              xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
-             xmlns:models="clr-namespace:GuideMeApp.Models"
+             xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              x:DataType="viewmodels:TripDetailViewModel"
              Title="{Binding Trip.Title}">
 
@@ -19,8 +19,8 @@
                     <!--<Image Source="{Binding Trip.Guide.Image}" Aspect="AspectFill" />-->
                     <Image Source="pascal_egli.jpg" Aspect="AspectFill" />
                 </Frame>
-                <!--<Label Text="{Binding Trip.Guide.FirstName}" FontSize="18" />-->
-                <Label Text="55 Jahre"/>
+                <Label Text="{Binding Trip.Guide.Fullname}" FontSize="18" />
+                <Label Text="{Binding Trip.Guide.Age}"/>
             </VerticalStackLayout>
 
         </Grid>
@@ -31,7 +31,7 @@
         <!-- Zusätzliche Informationen -->
         <Label Text="Besondere Infos" FontSize="24" FontAttributes="Bold" />
         <Label Text="{Binding Trip.Date}" />
-        <!--<Label Text="{Binding Trip.Address.AddressString}" />-->
+        <Label Text="{Binding Trip.Address.AddressString}" />
 
         <Button Text="BUCHEN" 
                 Command="{Binding BookCommand}"/>

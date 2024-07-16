@@ -8,7 +8,7 @@ namespace GuideMeApp.Shared.Models
     public class TripDetail : BaseEntity
     {
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
 
 

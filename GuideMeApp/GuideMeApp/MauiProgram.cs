@@ -56,10 +56,14 @@ namespace GuideMeApp
             builder.Services.AddScoped<ITripRepository, TripRepository>();
             builder.Services.AddScoped<ITripDetailRepository, TripDetailRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<IUserSettingRepository, UserSettingRepository>();
 
             builder.Services.AddScoped<ITripDetailService, TripDetailService>();
             builder.Services.AddScoped<ITripService, TripService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IUserSettingService, UserSettingService>();
             
 
 #if DEBUG

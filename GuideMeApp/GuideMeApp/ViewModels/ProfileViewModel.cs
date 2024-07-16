@@ -10,5 +10,10 @@ namespace GuideMeApp.ViewModels
 
         [ObservableProperty]
         User user;
+
+        public ProfileViewModel()
+        {
+   
+        }
     }
 }

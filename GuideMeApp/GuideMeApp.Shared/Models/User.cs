@@ -1,6 +1,8 @@
 ﻿#nullable disable
 
+using AgeCalculator;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GuideMeApp.Shared.Models
 {
@@ -20,14 +22,27 @@ namespace GuideMeApp.Shared.Models
         public byte[] Image { get; set; }
 
         [Required]
-        public Guid RoleId { get; set; }
+        public int RoleId { get; set; }
         public Role Role { get; set; }
 
         [Required]
-        public Guid UserSettingId { get; set; }
+        public int UserSettingId { get; set; }
         public UserSetting UserSetting { get; set; }
 
         [Required]
         public Address Address { get; set; }
+
+
+        [NotMapped]
+        public string Fullname
+        {
+            get => $"{FirstName} {LastName}";
+        }
+
+        [NotMapped]
+        public int Age
+        {
+            get => new Age(BirthDate, DateTime.Now).Years;
+        }
     }
 }

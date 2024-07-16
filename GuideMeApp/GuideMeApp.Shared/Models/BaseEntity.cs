@@ -5,11 +5,6 @@ namespace GuideMeApp.Shared.Models
     public abstract class BaseEntity
     {
         [Key]
-        public Guid Id { get; set; }
-
-        public BaseEntity()
-        {
-            Id = Guid.NewGuid();
-        }
+        public int Id { get; set; }
     }
 }

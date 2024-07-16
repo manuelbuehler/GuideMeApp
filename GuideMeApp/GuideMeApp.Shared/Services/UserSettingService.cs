@@ -6,6 +6,8 @@ namespace GuideMeApp.Shared.Services
     public interface IUserSettingService
     {
         public void Add(UserSetting userSetting);
+
+        public List<UserSetting> GetAll();
     }
 
     public class UserSettingService : IUserSettingService
@@ -20,6 +22,11 @@ namespace GuideMeApp.Shared.Services
         public void Add(UserSetting us)
         {
             _userSettingRepository.Add(us);
+        }
+
+        public List<UserSetting> GetAll()
+        {
+            return _userSettingRepository.GetAll();
         }
     }
 }

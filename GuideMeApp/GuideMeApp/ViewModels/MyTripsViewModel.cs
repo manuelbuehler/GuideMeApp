@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuideMeApp.Shared.Models;
+using GuideMeApp.Shared.Services;
 using GuideMeApp.Views;
 using System.Collections.ObjectModel;
 
@@ -14,10 +15,14 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         ObservableCollection<Trip> createdTrips;
 
-        public MyTripsViewModel()
+        readonly ITripService _tripService;
+
+        public MyTripsViewModel(ITripService tripService)
         {
             BookedTrips = new ObservableCollection<Trip>();
             CreatedTrips = new ObservableCollection<Trip>();
+
+            _tripService = tripService;
 
             Address address = new Address
             {
@@ -41,6 +46,16 @@ namespace GuideMeApp.ViewModels
             CreatedTrips.Add(new Trip { Title = "Velotour", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!"/*, Guide = user, Address = address */});
             CreatedTrips.Add(new Trip { Title = "Kanufahrt", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!"/*, Guide = user, Address = address */});
             CreatedTrips.Add(new Trip { Title = "Velotour", Description = "Tauchen Sie ein in die faszinierende Welt der Gletscher und lassen Sie sich von der majestätischen Landschaft verzaubern. Diese Führung bietet Ihnen die einzigartige Möglichkeit, die Wunder der Natur hautnah zu erleben und dabei viel Wissenswertes zu erfahren. Ideal für Abenteurer und Naturliebhaber!"/*, Guide = user, Address = address */});
+        }
+
+        [RelayCommand]
+        void Load()
+        {
+            var userId = 1;
+            var trips = _tripService.GetUpcommingTripsByUser(userId);
+            CreatedTrips.Clear();
+
+            trips.ForEach(t => CreatedTrips.Add(t));
         }
 
         [RelayCommand]

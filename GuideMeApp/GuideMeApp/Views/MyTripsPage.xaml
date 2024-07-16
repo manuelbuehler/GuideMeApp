@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GuideMeApp.Views"
              xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              x:Class="GuideMeApp.Views.MyTripsPage"
              x:DataType="viewmodels:MyTripsViewModel"
              Title="Meine Ausflüge">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+            Command="{Binding LoadCommand}"/>
+    </ContentPage.Behaviors>
+    
     <ScrollView>
         <StackLayout Padding="10" Spacing="10">
             <!-- Navigation Bar -->

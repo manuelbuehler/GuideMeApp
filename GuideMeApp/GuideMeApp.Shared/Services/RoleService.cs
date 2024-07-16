@@ -6,6 +6,8 @@ namespace GuideMeApp.Shared.Services
     public interface IRoleService
     {
         public void Add(Role role);
+
+        public List<Role> GetAll();
     }
     public class RoleService : IRoleService
     {
@@ -19,6 +21,11 @@ namespace GuideMeApp.Shared.Services
         public void Add(Role r)
         {
             _roleRepository.Add(r);
+        }
+
+        public List<Role> GetAll()
+        {
+            return _roleRepository.GetAll();
         }
     }
 }

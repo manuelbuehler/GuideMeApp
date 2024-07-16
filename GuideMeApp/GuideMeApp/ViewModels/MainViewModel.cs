@@ -44,15 +44,11 @@ namespace GuideMeApp.ViewModels
         }
 
         [RelayCommand]
-        void LoadData()
+        void Load()
         {
-            var tripList = _tripService.GetAll();
+            var trips = _tripService.GetAll();
             Trips.Clear();
-
-            foreach (var trip in tripList)
-            {
-                Trips.Add(trip);
-            }
+            trips.ForEach(t => Trips.Add(t));
         }
 
         [RelayCommand]
