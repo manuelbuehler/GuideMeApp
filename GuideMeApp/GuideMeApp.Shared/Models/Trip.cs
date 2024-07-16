@@ -25,7 +25,6 @@ namespace GuideMeApp.Shared.Models
         public User Guide { get; set; }
 
         [Required]
-        public Guid AddressId { get; set; }
         public Address Address { get; set; }
     }
 }

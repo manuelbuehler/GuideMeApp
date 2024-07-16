@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Maui;
-using GuideMeApp.Data;
 using GuideMeApp.Shared.Data;
-using GuideMeApp.Shared.Repository;
+using GuideMeApp.Shared.Repositories;
+using GuideMeApp.Shared.Services;
 using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
 using InputKit.Handlers;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace GuideMeApp
@@ -45,15 +44,23 @@ namespace GuideMeApp
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<ProfileViewModel>();
 
-            builder.Services.AddSingleton<GuideMeDatabase>();
+            //    builder.Services.AddDbContext<LocalDbContext>(/*opt =>
+            //opt.UseSqlServer("your connection string should be add here")*/);
 
-            builder.Services.AddDbContext<LocalDbContext>(/*opt =>
-        opt.UseSqlServer("your connection string should be add here")*/);
+
+            builder.Services.AddTransient<LocalDbContext>((services) =>
+            {
+                return new LocalDbContext(Path.Combine(FileSystem.AppDataDirectory, "SQLite001.db3"));
+            });
 
             builder.Services.AddScoped<ITripRepository, TripRepository>();
             builder.Services.AddScoped<ITripDetailRepository, TripDetailRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+            builder.Services.AddScoped<ITripDetailService, TripDetailService>();
+            builder.Services.AddScoped<ITripService, TripService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            
 
 #if DEBUG
             builder.Logging.AddDebug();

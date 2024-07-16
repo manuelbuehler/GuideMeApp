@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using GuideMeApp.Shared.Models;
 using GuideMeApp.Views;
-using GuideMeApp.Data;
+using GuideMeApp.Shared.Services;
 
 namespace GuideMeApp.ViewModels
 {
@@ -12,12 +12,13 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         public static ObservableCollection<Trip> trips;
 
-        readonly GuideMeDatabase _database;
+        readonly ITripService _tripService;
 
-        public MainViewModel(GuideMeDatabase database)
+        public MainViewModel(ITripService tripService)
         {
-            _database = database;
             Trips = new ObservableCollection<Trip>();
+            _tripService = tripService;
+
 
             //    Address address = new Address
             //    {
@@ -43,9 +44,9 @@ namespace GuideMeApp.ViewModels
         }
 
         [RelayCommand]
-        async Task LoadData()
+        void LoadData()
         {
-            var tripList = await _database.GetTripsAsync();
+            var tripList = _tripService.GetAll();
             Trips.Clear();
 
             foreach (var trip in tripList)

@@ -12,9 +12,6 @@ namespace GuideMeApp.Shared.Data
         public DbSet<UserSetting> UserSettings { get; set; }
 
         public DbSet<Role> Roles { get; set; }
-
-        public DbSet<Address> Addresses { get; set; }
-
         public DbSet<Trip> Trips { get; set; }
 
         public DbSet<TripDetail> TripDetails { get; set; }
@@ -37,6 +34,12 @@ namespace GuideMeApp.Shared.Data
             Init();
         }
 
+        public LocalDbContext(string filenameWithPath)
+        {
+            File = filenameWithPath;
+            Init();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -51,7 +54,7 @@ namespace GuideMeApp.Shared.Data
 
                 SQLitePCL.Batteries_V2.Init();
 
-                Database.MigrateAsync();
+                Database.Migrate();
             }
         }
         #endregion
@@ -59,18 +62,6 @@ namespace GuideMeApp.Shared.Data
         #region RELATIONS
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Address>(entity =>
-            {
-                entity.ToTable("Address");
-                entity.HasKey(e => e.Id);
-            });
-
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.ToTable("Role");
-                entity.HasKey(e => e.Id);
-            });
-
             modelBuilder.Entity<Trip>(entity =>
             {
                 entity.ToTable("Trip");
@@ -79,9 +70,7 @@ namespace GuideMeApp.Shared.Data
                 entity.HasOne(e => e.Guide)
                       .WithMany()
                       .HasForeignKey(e => e.GuideId);
-                entity.HasOne(e => e.Address)
-                      .WithMany()
-                      .HasForeignKey(e => e.AddressId);
+                entity.OwnsOne(e => e.Address);
             });
 
             modelBuilder.Entity<TripDetail>(entity =>
@@ -93,27 +82,23 @@ namespace GuideMeApp.Shared.Data
                       .HasForeignKey(e => e.UserId);
             });
 
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.ToTable("User");
-                entity.HasKey(e => e.Id);
-                entity.HasIndex(e => new { e.FirstName, e.LastName });
-                entity.HasOne(e => e.Role)
-                      .WithMany()
-                      .HasForeignKey(e => e.RoleId);
-                entity.HasOne(e => e.UserSetting)
-                      .WithMany()
-                      .HasForeignKey(e => e.UserSettingId);
-                entity.HasOne(e => e.Address)
-                      .WithMany()
-                      .HasForeignKey(e => e.AddressId);
-            });
+            //modelBuilder.Entity<User>(entity =>
+            //{
+            //    entity.ToTable("User");
+            //    entity.HasKey(e => e.Id);
+            //    entity.HasIndex(e => new { e.FirstName, e.LastName });
+            //    entity.Has(e => e.Role);
+            //    entity.HasOne(e => e.UserSetting)
+            //          .WithMany()
+            //          .HasForeignKey(e => e.UserSettingId);
+            //    entity.OwnsOne(e => e.Address);
+            //});
 
-            modelBuilder.Entity<UserSetting>(entity =>
-            {
-                entity.ToTable("UserSetting");
-                entity.HasKey(e => e.Id);
-            });
+            //modelBuilder.Entity<UserSetting>(entity =>
+            //{
+            //    entity.ToTable("UserSetting");
+            //    entity.HasKey(e => e.Id);
+            //});
 
             modelBuilder.HasDefaultSchema("dbo");
 

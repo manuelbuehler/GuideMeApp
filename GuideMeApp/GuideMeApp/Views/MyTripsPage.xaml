@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GuideMeApp.Views"
              xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
-             xmlns:models="clr-namespace:GuideMeApp.Models"
+             xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              x:Class="GuideMeApp.Views.MyTripsPage"
              x:DataType="viewmodels:MyTripsViewModel"
              Title="Meine Ausflüge">
