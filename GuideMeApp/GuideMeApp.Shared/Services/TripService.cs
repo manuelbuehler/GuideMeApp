@@ -12,7 +12,7 @@ namespace GuideMeApp.Shared.Services
 
         Task RemoveAsync(Trip trip);
 
-        Task<List<Trip>> GetUpcommingTripsByUser(int userId);
+        Task<List<Trip>> GetUpcommingTripsByUserId(int userId);
     }
 
     public class TripService : ITripService
@@ -39,7 +39,7 @@ namespace GuideMeApp.Shared.Services
             await _tripRepository.RemoveAsync(trip);
         }
 
-        public async Task<List<Trip>> GetUpcommingTripsByUser(int userId)
+        public async Task<List<Trip>> GetUpcommingTripsByUserId(int userId)
         {
             return await _tripRepository.GetUpcommingTripsByUserIdAsync(userId);
         }

@@ -10,19 +10,21 @@ namespace GuideMeApp.ViewModels
     public partial class MyTripsViewModel : ObservableObject
     {
         [ObservableProperty]
-        ObservableCollection<Trip> bookedTrips;
+        ObservableCollection<TripDetail> bookedTrips;
 
         [ObservableProperty]
         ObservableCollection<Trip> createdTrips;
 
         readonly ITripService _tripService;
+        readonly ITripDetailService _tripDetailService;
 
-        public MyTripsViewModel(ITripService tripService)
+        public MyTripsViewModel(ITripService tripService, ITripDetailService tripDetailService)
         {
             BookedTrips = [];
             CreatedTrips = [];
 
             _tripService = tripService;
+            _tripDetailService = tripDetailService;
 
             //Address address = new Address
             //{
@@ -52,10 +54,14 @@ namespace GuideMeApp.ViewModels
         async Task Load()
         {
             var userId = 1;
-            var trips = await _tripService.GetUpcommingTripsByUser(userId);
-            CreatedTrips.Clear();
+            var createdTrips = await _tripService.GetUpcommingTripsByUserId(userId);
+            var bookedTrips = await _tripDetailService.GetBookedTripsByUserId(userId);
 
-            trips.ForEach(t => CreatedTrips.Add(t));
+            CreatedTrips.Clear();
+            BookedTrips.Clear();
+
+            createdTrips.ForEach(CreatedTrips.Add);
+            bookedTrips.ForEach(BookedTrips.Add);
         }
 
         [RelayCommand]
@@ -65,12 +71,15 @@ namespace GuideMeApp.ViewModels
         }
 
         [RelayCommand]
-        async Task Cancel(Trip t)
+        async Task Cancel(TripDetail td)
         {
-            bool answer = await Shell.Current.DisplayAlert("Buchung stornieren?", $"Sind Sie sicher, dass Sie den Ausflug \"{t.Title}\" stornieren wollen?", "Ja", "Nein");
+            bool answer = await Shell.Current.DisplayAlert("Buchung stornieren?", $"Sind Sie sicher, dass Sie den Ausflug \"{td.Trip.Title}\" stornieren wollen?", "Ja", "Nein");
 
             if (answer)
-                BookedTrips.Remove(t);
+            {
+                await _tripDetailService.RemoveAsync(td);
+                BookedTrips.Remove(td);
+            }
         }
 
         [RelayCommand]

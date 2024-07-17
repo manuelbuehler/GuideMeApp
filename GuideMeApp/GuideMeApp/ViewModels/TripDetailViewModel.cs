@@ -9,7 +9,7 @@ namespace GuideMeApp.ViewModels
     public partial class TripDetailViewModel : ObservableObject
     {
         [ObservableProperty]
-        Trip? trip;
+        Trip trip;
 
         readonly ITripDetailRepository _tripDetailRepository;
 
@@ -21,9 +21,11 @@ namespace GuideMeApp.ViewModels
         [RelayCommand]
         async Task Book()
         {
-            var td = new TripDetail() { };
+            var userId = 1;
+            var td = new TripDetail(userId, Trip.Id);
+            await _tripDetailRepository.AddAsync(td);
 
-            await Shell.Current.DisplayAlert("Buchung erfolgreich!", $"Der Ausflug wurde erfolgreich gebucht und ist nun unter \"Meine Ausflüge\" zu finden", "OK");
+            await Shell.Current.DisplayAlert("Buchung erfolgreich!", $"{Trip.Title} wurde erfolgreich gebucht und ist nun unter \"Meine Ausflüge\" zu finden", "OK");
             await Shell.Current.GoToAsync("..");
         }
     }

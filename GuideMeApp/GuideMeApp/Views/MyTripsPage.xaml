@@ -13,7 +13,7 @@
             EventName="Appearing"
             Command="{Binding LoadCommand}"/>
     </ContentPage.Behaviors>
-    
+
     <ScrollView>
         <StackLayout Padding="10" Spacing="10">
             <!-- Navigation Bar -->
@@ -23,7 +23,7 @@
             <Label Text="Gebucht" FontSize="18" FontAttributes="Bold"/>
             <CollectionView SelectionMode="None" ItemsSource="{Binding BookedTrips}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Trip">
+                    <DataTemplate x:DataType="models:TripDetail">
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItem Text="stornieren" BackgroundColor="Red"
@@ -32,11 +32,11 @@
                             </SwipeView.RightItems>
                             <Frame Margin="10" CornerRadius="10" BackgroundColor="{StaticResource Primary}">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyTripsViewModel}}, Path=TapCommand}" CommandParameter="{Binding .}"/>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyTripsViewModel}}, Path=TapCommand}" CommandParameter="{Binding Trip}"/>
                                 </Frame.GestureRecognizers>
                                 <StackLayout VerticalOptions="Center" Spacing="5">
-                                    <Label Text="{Binding Title}" FontSize="18" TextColor="White"/>
-                                    <Label Text="{Binding Date}" TextColor="White"/>
+                                    <Label Text="{Binding Trip.Title}" FontSize="18" TextColor="White"/>
+                                    <Label Text="{Binding Trip.Date}" TextColor="White"/>
                                 </StackLayout>
                             </Frame>
                         </SwipeView>
@@ -48,21 +48,15 @@
             <CollectionView SelectionMode="None" ItemsSource="{Binding CreatedTrips}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Trip">
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItem Text="bearbeiten" BackgroundColor="Red"
-                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyTripsViewModel}}, Path=CancelCommand}"/>
-                            </SwipeView.RightItems>
-                            <Frame Margin="10" CornerRadius="10" BackgroundColor="{StaticResource Primary}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyTripsViewModel}}, Path=EditCommand}" CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <StackLayout VerticalOptions="Center" Spacing="5">
-                                    <Label Text="{Binding Title}" FontSize="18" TextColor="White"/>
-                                    <Label Text="{Binding Date}" TextColor="White"/>
-                                </StackLayout>
-                            </Frame>
-                        </SwipeView>
+                        <Frame Margin="10" CornerRadius="10" BackgroundColor="{StaticResource Primary}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:MyTripsViewModel}}, Path=EditCommand}" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <StackLayout VerticalOptions="Center" Spacing="5">
+                                <Label Text="{Binding Title}" FontSize="18" TextColor="White"/>
+                                <Label Text="{Binding Date}" TextColor="White"/>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

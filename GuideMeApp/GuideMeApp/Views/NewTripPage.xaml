@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GuideMeApp.Views"
-             xmlns:models="clr-namespace:GuideMeApp.Models"
+             xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              xmlns:viewmodel="clr-namespace:GuideMeApp.ViewModels"
              x:Class="GuideMeApp.Views.NewTripPage"
              x:DataType="viewmodel:NewTripViewModel"
