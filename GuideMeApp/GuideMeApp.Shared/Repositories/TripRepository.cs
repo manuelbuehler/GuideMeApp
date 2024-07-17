@@ -6,7 +6,7 @@ namespace GuideMeApp.Shared.Repositories
 {
     public interface ITripRepository : IGenericRepository<Trip>
     {
-        List<Trip> GetUpcommingTripsByUserId(int userId);
+        Task<List<Trip>> GetUpcommingTripsByUserIdAsync(int userId);
     }
 
     public class TripRepository : GenericRepository<Trip>, ITripRepository
@@ -16,11 +16,11 @@ namespace GuideMeApp.Shared.Repositories
 
         }
 
-        public List<Trip> GetUpcommingTripsByUserId(int userId)
+        public async Task<List<Trip>> GetUpcommingTripsByUserIdAsync(int userId)
         {
-            return _context.Trips
-                .Where(t => t.GuideId == userId /*&& t.Date > DateTime.Now*/)
-                .ToList();
+            return await _context.Trips
+                .Where(t => t.GuideId == userId && t.Date > DateTime.Now)
+                .ToListAsync();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GuideMeApp.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        public static ObservableCollection<Trip> trips;
+        ObservableCollection<Trip> trips;
 
         readonly ITripService _tripService;
         readonly IUserService _userService;
@@ -19,7 +19,7 @@ namespace GuideMeApp.ViewModels
 
         public MainViewModel(ITripService tripService, IUserService userService, IRoleService roleService, IUserSettingService userSettingService)
         {
-            Trips = new ObservableCollection<Trip>();
+            Trips = [];
             _tripService = tripService;
             _userService = userService;
             _roleService = roleService;
@@ -50,10 +50,10 @@ namespace GuideMeApp.ViewModels
         }
 
         [RelayCommand]
-        void Load()
+        async Task Load()
         {
-            var u = _userService.GetAll().FirstOrDefault();
-
+            var uList = await _userService.GetAllAsync();
+            var u = uList.FirstOrDefault();
 
             if (u is null)
             {
@@ -61,14 +61,14 @@ namespace GuideMeApp.ViewModels
                 var a = new Address() { AddressLine1 = "Demutstrasse 119", City = "St.Gallen", Country = "CH", PostalCode = "9000" };
                 var r = new Role() { Id = 1, Name = "Admin" };
                 
-                _userSettingService.Add(us);
-                _roleService.Add(r);
+                await _userSettingService.AddAsync(us);
+                await _roleService.AddAsync(r);
 
-                _userService.Add(new User() { Id = 1, BirthDate = DateTime.Now, FirstName = "Pascal", LastName = "Egli", UserSettingId = us.Id, UserGroup = UserGroups.Alle, RoleId = r.Id });
+                await _userService.AddAsync(new User() { Id = 1, BirthDate = DateTime.Now, FirstName = "Pascal", LastName = "Egli", UserSettingId = us.Id, UserGroup = UserGroups.Alle, RoleId = r.Id });
             }
             
 
-            var trips = _tripService.GetAll();
+            var trips = await _tripService.GetAllAsync();
             Trips.Clear();
             trips.ForEach(t => Trips.Add(t));
         }

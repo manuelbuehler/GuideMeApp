@@ -5,9 +5,9 @@ namespace GuideMeApp.Shared.Services
 {
     public interface IRoleService
     {
-        public void Add(Role role);
+        Task AddAsync(Role role);
 
-        public List<Role> GetAll();
+        Task<List<Role>> GetAllAsync();
     }
     public class RoleService : IRoleService
     {
@@ -18,14 +18,14 @@ namespace GuideMeApp.Shared.Services
             _roleRepository = roleRepository;
         }
 
-        public void Add(Role r)
+        public async Task AddAsync(Role r)
         {
-            _roleRepository.Add(r);
+            await _roleRepository.AddAsync(r);
         }
 
-        public List<Role> GetAll()
+        public async Task<List<Role>>GetAllAsync()
         {
-            return _roleRepository.GetAll();
+            return await _roleRepository.GetAllAsync();
         }
     }
 }

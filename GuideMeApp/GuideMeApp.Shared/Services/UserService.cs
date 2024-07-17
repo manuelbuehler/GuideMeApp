@@ -5,9 +5,9 @@ namespace GuideMeApp.Shared.Services
 {
     public interface IUserService
     {
-        public void Add(User user);
+        Task AddAsync(User user);
 
-        public List<User> GetAll();
+        Task<List<User>> GetAllAsync();
     }
 
     public class UserService : IUserService
@@ -19,14 +19,14 @@ namespace GuideMeApp.Shared.Services
             _userRepository = userRepository;
         }
 
-        public void Add(User u)
+        public async Task AddAsync(User u)
         {
-            _userRepository.Add(u);
+            await _userRepository.AddAsync(u);
         }
 
-        public List<User> GetAll()
+        public async Task<List<User>> GetAllAsync()
         {
-            return _userRepository.GetAll();
+            return await _userRepository.GetAllAsync();
         }
     }
 }

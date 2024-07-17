@@ -49,10 +49,10 @@ namespace GuideMeApp.ViewModels
         }
 
         [RelayCommand]
-        void Load()
+        async Task Load()
         {
             var userId = 1;
-            var trips = _tripService.GetUpcommingTripsByUser(userId);
+            var trips = await _tripService.GetUpcommingTripsByUser(userId);
             CreatedTrips.Clear();
 
             trips.ForEach(t => CreatedTrips.Add(t));

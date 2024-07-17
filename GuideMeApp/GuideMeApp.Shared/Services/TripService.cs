@@ -6,13 +6,13 @@ namespace GuideMeApp.Shared.Services
 {
     public interface ITripService
     {
-        List<Trip> GetAll();
+        Task<List<Trip>> GetAllAsync();
 
-        void Add(Trip trip);
+        Task AddAsync(Trip trip);
 
-        void Remove(Trip trip);
+        Task RemoveAsync(Trip trip);
 
-        List<Trip> GetUpcommingTripsByUser(int userId);
+        Task<List<Trip>> GetUpcommingTripsByUser(int userId);
     }
 
     public class TripService : ITripService
@@ -24,24 +24,24 @@ namespace GuideMeApp.Shared.Services
             _tripRepository = tripRepository;
         }
 
-        public List<Trip> GetAll()
+        public Task<List<Trip>> GetAllAsync()
         {
-            return _tripRepository.GetAll();
+            return _tripRepository.GetAllAsync();
         }
 
-        public void Add(Trip trip)
+        public async Task AddAsync(Trip trip)
         {
-            _tripRepository.Add(trip);
+            await _tripRepository.AddAsync(trip);
         }
 
-        public void Remove(Trip trip)
+        public async Task RemoveAsync(Trip trip)
         {
-            _tripRepository.Delete(trip);
+            await _tripRepository.RemoveAsync(trip);
         }
 
-        public List<Trip> GetUpcommingTripsByUser(int userId)
+        public async Task<List<Trip>> GetUpcommingTripsByUser(int userId)
         {
-            return _tripRepository.GetUpcommingTripsByUserId(userId);
+            return await _tripRepository.GetUpcommingTripsByUserIdAsync(userId);
         }
     }
 }

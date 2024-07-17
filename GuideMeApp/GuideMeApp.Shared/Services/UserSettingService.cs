@@ -5,9 +5,9 @@ namespace GuideMeApp.Shared.Services
 {
     public interface IUserSettingService
     {
-        public void Add(UserSetting userSetting);
+        Task AddAsync(UserSetting userSetting);
 
-        public List<UserSetting> GetAll();
+        Task<List<UserSetting>> GetAllAsync();
     }
 
     public class UserSettingService : IUserSettingService
@@ -19,14 +19,14 @@ namespace GuideMeApp.Shared.Services
             _userSettingRepository = userSettingRepository;
         }
 
-        public void Add(UserSetting us)
+        public async Task AddAsync(UserSetting us)
         {
-            _userSettingRepository.Add(us);
+            await _userSettingRepository.AddAsync(us);
         }
 
-        public List<UserSetting> GetAll()
+        public async Task<List<UserSetting>> GetAllAsync()
         {
-            return _userSettingRepository.GetAll();
+            return await _userSettingRepository.GetAllAsync();
         }
     }
 }

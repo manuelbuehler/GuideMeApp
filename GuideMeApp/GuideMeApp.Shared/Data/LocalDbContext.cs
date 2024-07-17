@@ -18,7 +18,7 @@ namespace GuideMeApp.Shared.Data
         #endregion
 
         #region CONSTRUCTOR
-        public static string File { get; protected set; }
+        public static string? File { get; protected set; }
         public static bool Initialized { get; protected set; }
 
         //public LocalDbContext(DbContextOptions<LocalDbContext> options)
@@ -64,50 +64,37 @@ namespace GuideMeApp.Shared.Data
         {
             modelBuilder.Entity<Trip>(entity =>
             {
-                entity.ToTable("Trip");
-                entity.HasKey(e => e.Id);
-                //entity.Property(e => e.Date).HasColumnType("datetime");
-                //entity.HasOne(e => e.Guide)
-                //      .WithOne()
-                //      .HasForeignKey(e => e.GuideId);
                 entity.OwnsOne(e => e.Address);
                 entity.HasOne(e => e.Guide)
-                    .WithMany() 
+                    .WithMany()
                     .HasForeignKey(e => e.GuideId)
-                .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<TripDetail>(entity =>
             {
-                entity.ToTable("TripDetail");
-                entity.HasKey(e => e.Id);
                 entity.HasOne(e => e.User)
-                      .WithMany()
-                      .HasForeignKey(e => e.UserId);
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Trip)
+                    .WithMany()
+                    .HasForeignKey(e => e.TripId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.OwnsOne(e => e.Address);
+                entity.HasOne(e => e.Role)
+                    .WithMany()
+                    .HasForeignKey(e => e.RoleId)
+                    .OnDelete(DeleteBehavior.SetNull);
+                entity.HasOne(e => e.UserSetting)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserSettingId)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
-
-            //modelBuilder.Entity<User>(entity =>
-            //{
-            //    entity.ToTable("User");
-            //    entity.HasKey(e => e.Id);
-            //    entity.HasIndex(e => new { e.FirstName, e.LastName });
-            //    entity.Has(e => e.Role);
-            //    entity.HasOne(e => e.UserSetting)
-            //          .WithMany()
-            //          .HasForeignKey(e => e.UserSettingId);
-            //    entity.OwnsOne(e => e.Address);
-            //});
-
-            //modelBuilder.Entity<UserSetting>(entity =>
-            //{
-            //    entity.ToTable("UserSetting");
-            //    entity.HasKey(e => e.Id);
-            //});
 
             modelBuilder.HasDefaultSchema("dbo");
 

@@ -1,9 +1,19 @@
-﻿using GuideMeApp.Shared.Data;
+﻿// https://medium.com/nacressoftware/generic-repository-pattern-with-c-and-entity-framework-724ffef365a7
+using GuideMeApp.Shared.Data;
 using GuideMeApp.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuideMeApp.Shared.Repositories
 {
+    public interface IGenericRepository<T> where T : BaseEntity
+    {
+        Task AddAsync(T entity);
+        Task RemoveAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task<List<T>> GetAllAsync();
+        Task<T?> GetByIdAsync(int id);
+    }
+
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         public readonly LocalDbContext _context;
@@ -14,32 +24,32 @@ namespace GuideMeApp.Shared.Repositories
             _context = context;
         }
 
-        public void Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            this.entity.Add(entity);
-            _context.SaveChanges();
+            await this.entity.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public async Task RemoveAsync(T entity)
         {
             this.entity.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _context.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
-            return this.entity.ToList();
+            return await this.entity.ToListAsync();
         }
 
-        public T GetById(Guid id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            var entity = _context.Find<T>(id);
+            var entity = await _context.FindAsync<T>(id);
             return entity;
         }
     }

@@ -37,14 +37,15 @@ namespace GuideMeApp.ViewModels
         async Task Create()
         {
             var a = new Address() { AddressLine1 = "Demutstrasse 119", PostalCode="9000", City = "St.Gallen", Country = "Switzerland" };
-            var u = _userService.GetAll().First();
+            var u = await _userService.GetAllAsync();
+
 
             Trip.Address = a;
-            Trip.GuideId = u.Id;
+            Trip.GuideId = u.First().Id;
             Trip.Image = new byte[1];
 
-            _tripService.Add(Trip);
-            var t = _tripService.GetAll();
+            await _tripService.AddAsync(Trip);
+            var t = await _tripService.GetAllAsync();
             await Shell.Current.GoToAsync("..");
         }
     }

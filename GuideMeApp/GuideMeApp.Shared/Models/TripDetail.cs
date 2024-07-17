@@ -1,7 +1,6 @@
 ﻿#nullable disable
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GuideMeApp.Shared.Models
 {
@@ -11,6 +10,9 @@ namespace GuideMeApp.Shared.Models
         public int UserId { get; set; }
         public User User { get; set; }
 
+        [Required]
+        public int TripId { get; set; }
+        public Trip Trip { get; set; }
 
         [Range(0, 5)]
         public int Rating { get; set; }
