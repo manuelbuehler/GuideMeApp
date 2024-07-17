@@ -7,7 +7,11 @@ namespace GuideMeApp.Shared.Services
     {
         Task AddAsync(User user);
 
+        Task UpdateAsync(User user);
+
         Task<List<User>> GetAllAsync();
+
+        Task<User?> GetByIdAsync(int id);
     }
 
     public class UserService : IUserService
@@ -24,9 +28,19 @@ namespace GuideMeApp.Shared.Services
             await _userRepository.AddAsync(u);
         }
 
+        public async Task UpdateAsync(User user)
+        {
+            await _userRepository.UpdateAsync(user);
+        }
+
         public async Task<List<User>> GetAllAsync()
         {
             return await _userRepository.GetAllAsync();
+        }
+
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            return await _userRepository.GetByIdAsync(id);
         }
     }
 }

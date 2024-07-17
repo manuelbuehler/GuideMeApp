@@ -36,7 +36,7 @@
                                 </Frame.GestureRecognizers>
                                 <StackLayout VerticalOptions="Center" Spacing="5">
                                     <Label Text="{Binding Trip.Title}" FontSize="18" TextColor="White"/>
-                                    <Label Text="{Binding Trip.Date}" TextColor="White"/>
+                                    <Label Text="{Binding Trip.DateString}" TextColor="White"/>
                                 </StackLayout>
                             </Frame>
                         </SwipeView>
@@ -54,7 +54,7 @@
                             </Frame.GestureRecognizers>
                             <StackLayout VerticalOptions="Center" Spacing="5">
                                 <Label Text="{Binding Title}" FontSize="18" TextColor="White"/>
-                                <Label Text="{Binding Date}" TextColor="White"/>
+                                <Label Text="{Binding DateString}" TextColor="White"/>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

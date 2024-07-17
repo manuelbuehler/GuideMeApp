@@ -19,6 +19,10 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         private TimeSpan time;
 
+        [ObservableProperty]
+        ImageSource image;
+
+
         public NewTripViewModel(ITripService tripService, IRoleService roleService, IUserService userService, IUserSettingService userSettingService)
         {
             _tripService = tripService;
@@ -47,6 +51,22 @@ namespace GuideMeApp.ViewModels
             await _tripService.AddAsync(Trip);
             var t = await _tripService.GetAllAsync();
             await Shell.Current.GoToAsync("..");
+        }
+
+        [RelayCommand]
+        async Task Upload()
+        {
+            var result = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Bild hochladen",
+                FileTypes = FilePickerFileType.Images
+            });
+
+            if (result is null)
+                return;
+
+            var stream = await result.OpenReadAsync();
+            Image = ImageSource.FromStream(() => stream);
         }
     }
 }

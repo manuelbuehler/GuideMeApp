@@ -17,9 +17,9 @@
                     </StackLayout>
 
                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Start">
-                        <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="40" IsClippedToBounds="False" VerticalOptions="Start" HorizontalOptions="Center"  BackgroundColor="White" BorderColor="{StaticResource Secondary}">
+                        <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="50" IsClippedToBounds="True" VerticalOptions="Start" HorizontalOptions="Center" BorderColor="Transparent" Padding="0">
                             <!--<Image Source="{Binding Trip.Guide.Image}" Aspect="AspectFill" />-->
-                            <Image Source="pascal_egli.jpg" Aspect="AspectFill" />
+                            <Image Source="pascal_egli.jpg"  Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill" />
                         </Frame>
                         <Label Text="{Binding Trip.Guide.Fullname}" FontSize="18" />
                         <Label Text="{Binding Trip.Guide.Age}"/>
@@ -32,9 +32,10 @@
 
                 <!-- Zusätzliche Informationen -->
                 <Label Text="Besondere Infos" FontSize="24" FontAttributes="Bold" />
-                <Label Text="{Binding Trip.Date}" />
-                <Label Text="{Binding Trip.Address.AddressString}" />
-
+                <Grid ColumnDefinitions=".40*, .60*">
+                    <Label Text="{Binding Trip.DateTimeString}" Grid.Column="0"/>
+                    <Label Text="{Binding Trip.Address.AddressString}" Grid.Column="1" HorizontalTextAlignment="End"/>
+                </Grid>
                 <Button Text="BUCHEN" 
                 Command="{Binding BookCommand}"/>
             </VerticalStackLayout>

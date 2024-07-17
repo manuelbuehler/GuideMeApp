@@ -26,5 +26,11 @@ namespace GuideMeApp.Shared.Models
 
         [Required]
         public Address Address { get; set; }
+
+        [NotMapped]
+        public string DateTimeString => Date.ToString("dd.MM.yyyy | HH:mm"); 
+
+        [NotMapped]
+        public string DateString => Date.ToString("dd.MM.yyyy");
     }
 }

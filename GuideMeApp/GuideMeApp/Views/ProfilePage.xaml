@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:icons="clr-namespace:GuideMeApp"
+             xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
+             xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
+             x:DataType="viewmodels:ProfileViewModel"
              x:Class="GuideMeApp.Views.ProfilePage"
              Title="ProfilePage">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior 
+            EventName="Appearing"
+            Command="{Binding LoadCommand}"/>
+    </ContentPage.Behaviors>
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
             <!-- Back Button -->
@@ -12,7 +22,7 @@
             <!-- Profile Section -->
             <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="20">
                 <Frame HasShadow="False" BorderColor="DarkBlue" CornerRadius="100" Padding="0" HorizontalOptions="Center">
-                    <Image Source="profile_image.png" Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>
+                    <Image Source="{Binding User.ImageSource}" Aspect="AspectFill" HeightRequest="200" WidthRequest="200"/>
                 </Frame>
                 <Button Text="Profilbild bearbeiten" TextColor="Black" BackgroundColor="Transparent" Command="{Binding EditProfileImageCommand}"/>
             </StackLayout>

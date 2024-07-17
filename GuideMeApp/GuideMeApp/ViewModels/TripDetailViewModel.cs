@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using GuideMeApp.Shared.Models;
 using GuideMeApp.Shared.Repositories;
+using GuideMeApp.Utils;
 
 namespace GuideMeApp.ViewModels
 {
@@ -12,16 +13,18 @@ namespace GuideMeApp.ViewModels
         Trip trip;
 
         readonly ITripDetailRepository _tripDetailRepository;
+        readonly IPreferencesHelper _preferencesHelper;
 
-        public TripDetailViewModel(ITripDetailRepository tripDetailRepository)
+        public TripDetailViewModel(ITripDetailRepository tripDetailRepository, IPreferencesHelper preferencesHelper)
         {
             _tripDetailRepository = tripDetailRepository;
+            _preferencesHelper = preferencesHelper;
         }
 
         [RelayCommand]
         async Task Book()
         {
-            var userId = 1;
+            var userId = _preferencesHelper.GetUserId();
             var td = new TripDetail(userId, Trip.Id);
             await _tripDetailRepository.AddAsync(td);
 

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using GuideMeApp.Shared.Models;
 using GuideMeApp.Shared.Services;
+using GuideMeApp.Utils;
 using GuideMeApp.Views;
 using System.Collections.ObjectModel;
 
@@ -17,14 +18,16 @@ namespace GuideMeApp.ViewModels
 
         readonly ITripService _tripService;
         readonly ITripDetailService _tripDetailService;
+        readonly IPreferencesHelper _preferencesHelper;
 
-        public MyTripsViewModel(ITripService tripService, ITripDetailService tripDetailService)
+        public MyTripsViewModel(ITripService tripService, ITripDetailService tripDetailService, IPreferencesHelper preferencesHelper)
         {
             BookedTrips = [];
             CreatedTrips = [];
 
             _tripService = tripService;
             _tripDetailService = tripDetailService;
+            _preferencesHelper = preferencesHelper;
 
             //Address address = new Address
             //{
@@ -53,7 +56,7 @@ namespace GuideMeApp.ViewModels
         [RelayCommand]
         async Task Load()
         {
-            var userId = 1;
+            var userId = _preferencesHelper.GetUserId();
             var createdTrips = await _tripService.GetUpcommingTripsByUserId(userId);
             var bookedTrips = await _tripDetailService.GetBookedTripsByUserId(userId);
 

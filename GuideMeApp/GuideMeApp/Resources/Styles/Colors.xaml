@@ -15,13 +15,13 @@
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="Border">#2B0B98</Color>
 
-    <Color x:Key="White">White</Color>
+    <Color x:Key="White">#e0e1dd</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
 
-    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray100">#fafafa</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
     <Color x:Key="Gray400">#919191</Color>

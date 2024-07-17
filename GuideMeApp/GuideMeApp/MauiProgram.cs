@@ -2,6 +2,7 @@
 using GuideMeApp.Shared.Data;
 using GuideMeApp.Shared.Repositories;
 using GuideMeApp.Shared.Services;
+using GuideMeApp.Utils;
 using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
 using InputKit.Handlers;
@@ -43,6 +44,8 @@ namespace GuideMeApp
 
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<ProfileViewModel>();
+
+            builder.Services.AddSingleton<IPreferencesHelper, PreferencesHelper>();
 
             //    builder.Services.AddDbContext<LocalDbContext>(/*opt =>
             //opt.UseSqlServer("your connection string should be add here")*/);

@@ -35,15 +35,12 @@ namespace GuideMeApp.Shared.Models
 
 
         [NotMapped]
-        public string Fullname
-        {
-            get => $"{FirstName} {LastName}";
-        }
+        public string Fullname => $"{FirstName} {LastName}";
+    
+        [NotMapped]
+        public int Age => BirthDate.CalculateAge(DateTime.Now).Years;
 
         [NotMapped]
-        public int Age
-        {
-            get => BirthDate.CalculateAge(DateTime.Now).Years;
-        }
+        public ImageSource ImageSource => ImageSource.FromStream(() => new MemoryStream(Image));
     }
 }
