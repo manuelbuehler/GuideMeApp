@@ -9,35 +9,39 @@
 
     <ScrollView>
         <VerticalStackLayout >
-            <Image Source="gletscher_wanderung.jpg" Aspect="AspectFill" HeightRequest="200" />
-            <VerticalStackLayout Margin="10">
-                <Grid ColumnDefinitions=".75*, .25*">
-                    <StackLayout Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="gletscher_wanderung.jpg" Aspect="AspectFill" />
+                <VerticalStackLayout Grid.Row="1">
+                    <StackLayout>
                         <Label Text="{Binding Trip.Title}" FontSize="24" FontAttributes="Bold" />
                     </StackLayout>
+                </VerticalStackLayout>
 
-                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Start">
-                        <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="50" IsClippedToBounds="True" VerticalOptions="Start" HorizontalOptions="Center" BorderColor="Transparent" Padding="0">
-                            <Image Source="{Binding Trip.Guide.ImageSource}" Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill"/>
-                        </Frame>
-                        <Label Text="{Binding Trip.Guide.Fullname}" FontSize="18" />
-                        <Label Text="{Binding Trip.Guide.Age, StringFormat='{0} Jahre'}" FontSize="18"/>
-                    </VerticalStackLayout>
+                <VerticalStackLayout Grid.RowSpan="2" VerticalOptions="End" HorizontalOptions="End" Margin="20, 20, 20, -45">
+                    <Frame WidthRequest="80" HeightRequest="80" CornerRadius="50" IsClippedToBounds="True" BorderColor="Transparent" Padding="0">
+                        <Image Source="{Binding Trip.Guide.ImageSource}" Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill" />
+                    </Frame>
+                    <Label Text="{Binding Trip.Guide.Fullname}" FontSize="18" />
+                    <Label Text="{Binding Trip.Guide.Age, StringFormat='{0} Jahre'}" FontSize="18"/>
+                </VerticalStackLayout>
+            </Grid>
 
-                </Grid>
-                <!-- Beschreibung -->
-                <Label Text="Beschreibung" FontSize="24" FontAttributes="Bold"/>
-                <Label Text="{Binding Trip.Description}"  />
+            <!-- Beschreibung -->
+            <Label Text="Beschreibung" FontSize="24" FontAttributes="Bold"/>
+            <Label Text="{Binding Trip.Description}"  />
 
-                <!-- Zusätzliche Informationen -->
-                <Label Text="Besondere Infos" FontSize="24" FontAttributes="Bold" />
-                <Grid ColumnDefinitions=".40*, .60*">
-                    <Label Text="{Binding Trip.DateTimeString}" Grid.Column="0"/>
-                    <Label Text="{Binding Trip.Address.AddressString}" Grid.Column="1" HorizontalTextAlignment="End"/>
-                </Grid>
-                <Button Text="BUCHEN" 
+            <!-- Zusätzliche Informationen -->
+            <Label Text="Besondere Infos" FontSize="24" FontAttributes="Bold" />
+            <Grid ColumnDefinitions=".40*, .60*">
+                <Label Text="{Binding Trip.DateTimeString}" Grid.Column="0"/>
+                <Label Text="{Binding Trip.Address.AddressString}" Grid.Column="1" HorizontalTextAlignment="End"/>
+            </Grid>
+            <Button Text="BUCHEN" 
                 Command="{Binding BookCommand}"/>
-            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
