@@ -43,7 +43,8 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#778da9"  />
+		<!--BaseSize="1024,1024"-->
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -63,7 +64,12 @@
 	  <None Remove="Resources\Images\map.svg" />
 	  <None Remove="Resources\Images\pascal_egli.jpg" />
 	  <None Remove="Resources\Images\setting.svg" />
+	  <None Remove="Resources\Splash\splash.svg" />
 	</ItemGroup>
+
+	<!--<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\splash.svg" />
+	</ItemGroup>-->
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />

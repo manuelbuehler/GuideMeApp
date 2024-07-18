@@ -68,9 +68,9 @@ namespace GuideMeApp.ViewModels
             }
             
 
-            var trips = await _tripService.GetAllAsync();
+            var trips = await _tripService.GetUpcommingTrips();
             Trips.Clear();
-            trips.ForEach(t => Trips.Add(t));
+            trips.ForEach(Trips.Add);
         }
 
         [RelayCommand]

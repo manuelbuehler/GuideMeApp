@@ -1,6 +1,5 @@
 ﻿using GuideMeApp.Shared.Models;
 using GuideMeApp.Shared.Repositories;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace GuideMeApp.Shared.Services
 {
@@ -13,6 +12,8 @@ namespace GuideMeApp.Shared.Services
         Task RemoveAsync(Trip trip);
 
         Task<List<Trip>> GetUpcommingTripsByUserId(int userId);
+
+        Task<List<Trip>> GetUpcommingTrips();
     }
 
     public class TripService : ITripService
@@ -24,9 +25,10 @@ namespace GuideMeApp.Shared.Services
             _tripRepository = tripRepository;
         }
 
-        public Task<List<Trip>> GetAllAsync()
+        public async Task<List<Trip>> GetAllAsync()
         {
-            return _tripRepository.GetAllAsync();
+            return await _tripRepository.GetAllAsync();
+                
         }
 
         public async Task AddAsync(Trip trip)
@@ -42,6 +44,11 @@ namespace GuideMeApp.Shared.Services
         public async Task<List<Trip>> GetUpcommingTripsByUserId(int userId)
         {
             return await _tripRepository.GetUpcommingTripsByUserIdAsync(userId);
+        }
+
+        public async Task<List<Trip>> GetUpcommingTrips()
+        {
+            return await _tripRepository.GetUpcommingTripsAsync();
         }
     }
 }

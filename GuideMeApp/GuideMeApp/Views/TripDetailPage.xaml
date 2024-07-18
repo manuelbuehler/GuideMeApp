@@ -18,11 +18,10 @@
 
                     <VerticalStackLayout Grid.Column="1" VerticalOptions="Start">
                         <Frame Grid.RowSpan="2" WidthRequest="80" HeightRequest="80" CornerRadius="50" IsClippedToBounds="True" VerticalOptions="Start" HorizontalOptions="Center" BorderColor="Transparent" Padding="0">
-                            <!--<Image Source="{Binding Trip.Guide.Image}" Aspect="AspectFill" />-->
-                            <Image Source="pascal_egli.jpg"  Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill" />
+                            <Image Source="{Binding Trip.Guide.ImageSource}" Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill"/>
                         </Frame>
                         <Label Text="{Binding Trip.Guide.Fullname}" FontSize="18" />
-                        <Label Text="{Binding Trip.Guide.Age}"/>
+                        <Label Text="{Binding Trip.Guide.Age, StringFormat='{0} Jahre'}" FontSize="18"/>
                     </VerticalStackLayout>
 
                 </Grid>
