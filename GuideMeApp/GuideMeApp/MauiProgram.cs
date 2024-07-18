@@ -14,6 +14,8 @@ namespace GuideMeApp
     {
         public static MauiApp CreateMauiApp()
         {
+            SyncfusionLicense.Register();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -67,8 +69,6 @@ namespace GuideMeApp
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IUserSettingService, UserSettingService>();
-            
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

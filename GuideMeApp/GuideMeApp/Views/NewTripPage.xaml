@@ -12,10 +12,10 @@
         <local:SubNavBar x:Name="SubNavBar"/>
 
         <!-- Page Content -->
-        <ContentView Grid.Row="1">
-            <VerticalStackLayout Spacing="15">
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20">
                 <Entry Text="{Binding Trip.Title}" Placeholder="Titel" />
-                <Entry Text="{Binding Trip.Description}" Placeholder="Beschreibung"/>
+                <Editor Text="{Binding Trip.Description}" Placeholder="Beschreibung" HeightRequest="150" MaxLength="500"/>
 
                 <Frame BorderColor="{StaticResource Secondary}" BackgroundColor="{StaticResource Gray100}" Padding="0">
                     <Image x:Name="myImage"
@@ -27,7 +27,7 @@
                        Opacity="0.7"/>
                 </Frame>
 
- 
+
                 <Button Text="Bild" />
 
                 <!--<Entry Placeholder="Standort" Text="{Binding Trip.Address}"/>-->
@@ -36,6 +36,6 @@
                 <Button Text="ERSTELLEN" 
                         Command="{Binding CreateCommand}"/>
             </VerticalStackLayout>
-        </ContentView>
+        </ScrollView>
     </Grid>
 </ContentPage>

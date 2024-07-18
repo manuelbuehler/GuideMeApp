@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using GuideMeApp.Shared.Models;
 using GuideMeApp.Views;
 using GuideMeApp.Shared.Services;
+using GuideMeApp.Utils;
 
 namespace GuideMeApp.ViewModels
 {
@@ -16,14 +17,16 @@ namespace GuideMeApp.ViewModels
         readonly IUserService _userService;
         readonly IRoleService _roleService;
         readonly IUserSettingService _userSettingService;
+        readonly IPreferencesHelper _preferencesHelper;
 
-        public MainViewModel(ITripService tripService, IUserService userService, IRoleService roleService, IUserSettingService userSettingService)
+        public MainViewModel(ITripService tripService, IUserService userService, IRoleService roleService, IUserSettingService userSettingService, IPreferencesHelper preferencesHelper)
         {
             Trips = [];
             _tripService = tripService;
             _userService = userService;
             _roleService = roleService;
             _userSettingService = userSettingService;
+            _preferencesHelper = preferencesHelper;
 
 
             //    Address address = new Address
@@ -52,21 +55,23 @@ namespace GuideMeApp.ViewModels
         [RelayCommand]
         async Task Load()
         {
-            var uList = await _userService.GetAllAsync();
-            var u = uList.FirstOrDefault();
+            var u = await _userService.GetByIdAsync(1);
 
             if (u is null)
             {
-                var us = new UserSetting() { BlinkBlocker = false, HighContrast = false, ScreenReader=false, TextEnlargement=false, TextReader=false, VoiceCommands=false };
+                var us = new UserSetting() { BlinkBlocker = false, HighContrast = false, ScreenReader = false, TextEnlargement = false, TextReader = false, VoiceCommands = false };
                 var a = new Address() { AddressLine1 = "Demutstrasse 119", City = "St.Gallen", Country = "CH", PostalCode = "9000" };
                 var r = new Role() { Id = 1, Name = "Admin" };
-                
+
                 await _userSettingService.AddAsync(us);
                 await _roleService.AddAsync(r);
 
-                await _userService.AddAsync(new User() { Id = 1, BirthDate = DateTime.Now, FirstName = "Pascal", LastName = "Egli", UserSettingId = us.Id, UserGroup = UserGroups.Alle, RoleId = r.Id });
+                u = new User() { Id = 1, BirthDate = DateTime.Now, FirstName = "Pascal", LastName = "Egli", UserSettingId = us.Id, UserGroup = UserGroups.Alle, RoleId = r.Id };
+
+                await _userService.AddAsync(u);
+                _preferencesHelper.SetUserId(u.Id);
             }
-            
+
 
             var trips = await _tripService.GetUpcommingTrips();
             Trips.Clear();
