@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GuideMeApp.Utils;
 
 namespace GuideMeApp
 {
@@ -6,6 +6,7 @@ namespace GuideMeApp
     {
         public App()
         {
+            SyncfusionLicense.Register();
             InitializeComponent();
 
             MainPage = new AppShell();

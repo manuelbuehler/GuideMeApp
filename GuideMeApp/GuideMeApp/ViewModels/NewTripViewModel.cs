@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿//https://www.syncfusion.com/blogs/post/designing-effective-data-entry-forms-in-net-maui-a-step-by-step-guide
+//https://www.syncfusion.com/blogs/post/dotnet-maui-text-input-layout
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GuideMeApp.Shared.Models;
 using GuideMeApp.Shared.Services;
@@ -21,7 +23,6 @@ namespace GuideMeApp.ViewModels
 
         [ObservableProperty]
         ImageSource image;
-
 
         public NewTripViewModel(ITripService tripService, IRoleService roleService, IUserService userService, IUserSettingService userSettingService)
         {

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"      
              x:Class="GuideMeApp.Views.TripDetailPage"
+             xmlns:rating="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              xmlns:viewmodels="clr-namespace:GuideMeApp.ViewModels"
              xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              x:DataType="viewmodels:TripDetailViewModel"
@@ -15,8 +16,14 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="gletscher_wanderung.jpg" Aspect="AspectFill" />
-                <VerticalStackLayout Grid.Row="1" Margin="10">
-                    <Label Text="{Binding Trip.Title}" FontSize="24" FontAttributes="Bold" />
+                <VerticalStackLayout Grid.Row="1" Margin="10" Spacing="5">
+                    <Label Text="{Binding Trip.Title}" FontSize="24" FontAttributes="Bold"/>
+                    <rating:SfRating x:Name="rating" BackgroundColor="Transparent" ItemSize="20" Precision="Half" HorizontalOptions="Start" ItemSpacing="8">
+                        <rating:SfRating.RatingSettings>
+                            <rating:RatingSettings RatedFill="Yellow" RatedStroke="Yellow" UnratedFill="Transparent" UnratedStroke="DarkGray"/>
+                        </rating:SfRating.RatingSettings>
+                    </rating:SfRating>
+                    <Label Text="Noch X Plätze"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.RowSpan="2" VerticalOptions="End" HorizontalOptions="End" Margin="20, 20, 20, -45">

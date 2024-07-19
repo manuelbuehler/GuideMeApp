@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:GuideMeApp.Views"
              xmlns:models="clr-namespace:GuideMeApp.Shared.Models;assembly=GuideMeApp.Shared"
              xmlns:viewmodel="clr-namespace:GuideMeApp.ViewModels"
+             xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+             xmlns:inputLayout="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="GuideMeApp.Views.NewTripPage"
              x:DataType="viewmodel:NewTripViewModel"
              Title="Neuer Ausflug">
@@ -14,6 +16,33 @@
         <!-- Page Content -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="20">
+                <inputLayout:SfTextInputLayout Hint= "First Name">
+                    <Entry Text = "Selva Ganapathy Kathiresan"/>
+                </inputLayout:SfTextInputLayout>
+                <dataForm:SfDataForm x:Name="contactForm"
+                         DataObject="{Binding Trip}"
+                         AutoGenerateItems="False" >
+                    <dataForm:SfDataForm.Items>
+                        <!--Name group-->
+                        <dataForm:DataFormGroupItem Name="Beschreibung">
+                            <dataForm:DataFormGroupItem.Items>
+                                <dataForm:DataFormTextItem FieldName="Title" Padding="0, 10, 10, 10" />
+                                <dataForm:DataFormTextItem FieldName="Description"  Padding="0, 10, 10, 10"/>
+                            </dataForm:DataFormGroupItem.Items>
+                        </dataForm:DataFormGroupItem>
+                        <!--Address group-->
+                        <dataForm:DataFormGroupItem Name="Address">
+                            <dataForm:DataFormGroupItem.Items>
+                                <dataForm:DataFormMultilineItem FieldName="Adresse" RowSpan="2" Padding="0, 10, 10, 10"/>
+                                <dataForm:DataFormTextItem FieldName="City"  Padding="0, 10, 10, 10"/>
+                                <dataForm:DataFormTextItem FieldName="State" Padding="0, 10, 10, 10"/>
+                            </dataForm:DataFormGroupItem.Items>
+                        </dataForm:DataFormGroupItem>
+                    </dataForm:SfDataForm.Items>
+                </dataForm:SfDataForm>
+
+
+
                 <Entry Text="{Binding Trip.Title}" Placeholder="Titel" />
                 <Editor Text="{Binding Trip.Description}" Placeholder="Beschreibung" HeightRequest="150" MaxLength="500"/>
 

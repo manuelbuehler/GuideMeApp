@@ -9,12 +9,15 @@ namespace GuideMeApp.Shared.Models
     {
         [Required]
         [MaxLength(100)]
+        [Display(Prompt = "Titel")]
         public string Title { get; set; }
 
         [MaxLength(500)]
+        [Display(Prompt = "Beschreibung")]
         public string Description { get; set; }
 
         [Required]
+        [Display(Prompt = "Datum")]
         public DateTime Date { get; set; }
 
         [Required]
@@ -25,6 +28,7 @@ namespace GuideMeApp.Shared.Models
         public User Guide { get; set; }
 
         [Required]
+        [Display(Prompt = "Addresse")]
         public Address Address { get; set; }
 
         [NotMapped]

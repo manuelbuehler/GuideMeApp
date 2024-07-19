@@ -7,19 +7,19 @@ using GuideMeApp.ViewModels;
 using GuideMeApp.Views;
 using InputKit.Handlers;
 using Microsoft.Extensions.Logging;
-
+using Syncfusion.Maui.Core.Hosting;
+ 
 namespace GuideMeApp
 {
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
         {
-            SyncfusionLicense.Register();
-
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .ConfigureSyncfusionCore()
                 .ConfigureMauiHandlers(handlers =>
                 {
                     handlers.AddInputKitHandlers();
