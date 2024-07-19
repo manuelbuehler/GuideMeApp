@@ -18,9 +18,9 @@ namespace GuideMeApp.Shared.Services
             _roleRepository = roleRepository;
         }
 
-        public async Task AddAsync(Role r)
+        public async Task AddAsync(Role role)
         {
-            await _roleRepository.AddAsync(r);
+            await _roleRepository.AddAsync(role);
         }
 
         public async Task<List<Role>>GetAllAsync()

@@ -23,9 +23,9 @@ namespace GuideMeApp.Shared.Services
             _userRepository = userRepository;
         }
 
-        public async Task AddAsync(User u)
+        public async Task AddAsync(User user)
         {
-            await _userRepository.AddAsync(u);
+            await _userRepository.AddAsync(user);
         }
 
         public async Task UpdateAsync(User user)

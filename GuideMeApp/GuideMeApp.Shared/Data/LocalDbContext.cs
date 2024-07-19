@@ -21,13 +21,6 @@ namespace GuideMeApp.Shared.Data
         public static string? File { get; protected set; }
         public static bool Initialized { get; protected set; }
 
-        //public LocalDbContext(DbContextOptions<LocalDbContext> options)
-        //: base(options)
-        //{
-        //    File = Path.Combine("../", "UsedByMigratorOnly1.db3");
-        //    Init();
-        //}
-
         public LocalDbContext()
         {
             File = Path.Combine("../", "UsedByMigratorOnly1.db3");

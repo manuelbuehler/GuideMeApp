@@ -11,9 +11,7 @@ namespace GuideMeApp.ViewModels
     public partial class NewTripViewModel : ObservableObject
     {
         readonly ITripService _tripService;
-        readonly IRoleService _roleService;
         readonly IUserService _userService;
-        readonly IUserSettingService _userSettingService;
 
         [ObservableProperty]
         private Trip trip;
@@ -24,12 +22,10 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         ImageSource image;
 
-        public NewTripViewModel(ITripService tripService, IRoleService roleService, IUserService userService, IUserSettingService userSettingService)
+        public NewTripViewModel(ITripService tripService, IUserService userService)
         {
             _tripService = tripService;
-            _roleService = roleService;
             _userService = userService;
-            _userSettingService = userSettingService;
             Trip = new Trip { Date = DateTime.Now };
         }
 
@@ -50,7 +46,6 @@ namespace GuideMeApp.ViewModels
             Trip.Image = new byte[1];
 
             await _tripService.AddAsync(Trip);
-            var t = await _tripService.GetAllAsync();
             await Shell.Current.GoToAsync("..");
         }
 

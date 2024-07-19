@@ -19,9 +19,9 @@ namespace GuideMeApp.Shared.Services
             _userSettingRepository = userSettingRepository;
         }
 
-        public async Task AddAsync(UserSetting us)
+        public async Task AddAsync(UserSetting userSetting)
         {
-            await _userSettingRepository.AddAsync(us);
+            await _userSettingRepository.AddAsync(userSetting);
         }
 
         public async Task<List<UserSetting>> GetAllAsync()

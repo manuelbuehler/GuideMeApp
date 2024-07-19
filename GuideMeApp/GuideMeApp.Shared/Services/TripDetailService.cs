@@ -19,9 +19,9 @@ namespace GuideMeApp.Shared.Services
             _tripDetailRepository = tripDetailRepository;
         }
 
-        public async Task RemoveAsync(TripDetail td)
+        public async Task RemoveAsync(TripDetail tripDetail)
         {
-            await _tripDetailRepository.RemoveAsync(td);
+            await _tripDetailRepository.RemoveAsync(tripDetail);
         }
 
         public async Task<List<TripDetail>> GetBookedTripsByUserId(int userId)

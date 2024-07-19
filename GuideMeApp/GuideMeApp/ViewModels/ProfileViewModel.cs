@@ -11,8 +11,8 @@ namespace GuideMeApp.ViewModels
         [ObservableProperty]
         User? user;
 
-        IUserService _userService;
-        IPreferencesHelper _preferencesHelper;
+        readonly IUserService _userService;
+        readonly IPreferencesHelper _preferencesHelper;
 
         public ProfileViewModel(IUserService userService, IPreferencesHelper preferencesHelper)
         {

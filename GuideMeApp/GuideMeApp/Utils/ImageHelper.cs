@@ -1,6 +1,6 @@
 ﻿namespace GuideMeApp.Utils
 {
-    public class ImageHelper
+    public static class ImageHelper
     {
         public static async Task<FileResult?> ImageFilePicker()
         {
